@@ -1,5 +1,6 @@
 import Header from './components/Header'
 import Footer from './components/Footer'
+import HomePage from './pages/HomePage'
 
 
 function App() {
@@ -7,7 +8,7 @@ function App() {
     <div>
       <Header />
       <main>
-        Hello World!
+        <HomePage />
       </main>
       <Footer />
     </div>

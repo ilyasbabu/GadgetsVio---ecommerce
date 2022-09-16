@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Header() {
     return (
@@ -7,9 +8,9 @@ function Header() {
                 <div className="relative items-center pl-1 flex w-full lg:max-w-68 sm:pr-2 sm:ml-0">
                     <div className="container relative left-0 z-50 flex w-3/4 h-full">
                         <div className="relative p-1 flex items-center justify-start w-1/2 ml-5 mr-4 sm:mr-0 sm:right-auto">
-                            <a href="/" className="block relative text-lg font-semibold text-slate-600">
+                            <Link to="/" className="block relative text-lg font-semibold text-slate-600">
                                 GadgetsVio &nbsp;&nbsp;
-                            </a>
+                            </Link>
                         </div>
                         <div className="relative p-1 flex items-center justify-start w-1/2 ml-5 mr-4 sm:mr-0 sm:right-auto">
                             <div className="absolute z-50 flex items-center justify-center block w-auto h-10 p-3 pr-2 text-sm text-gray-500 uppercase cursor-pointer sm:hidden">
@@ -29,12 +30,12 @@ function Header() {
                         </div>
                     </div>
                     <div className="relative p-1 flex items-center justify-end w-1/4 ml-5 mr-4 sm:mr-0 sm:right-auto">
-                        <a href="/" className="block relative">
+                        <Link to="/" className="block relative">
                             Login &nbsp;&nbsp;<i className="fa-solid fa-user"></i>&nbsp;&nbsp;
-                        </a>
-                        <a href="/" className="block relative">
+                        </Link>
+                        <Link to="/" className="block relative">
                             Cart &nbsp;&nbsp;<i className="fa-solid fa-shopping-cart"></i>&nbsp;&nbsp;
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>
@@ -42,18 +43,18 @@ function Header() {
                 <div className="relative items-center pl-1 flex w-full lg:max-w-68 sm:pr-2 sm:ml-0">
                     <div className="container relative left-0 z-50 flex w-3/4 h-full">
                         <div className="relative mt-7 flex items-center justify-start w-1/4  mr-5 sm:mr-0 sm:right-auto">
-                            <a href="/" className="block relative text-lg font-semibold text-slate-600">
+                            <Link to="/" className="block relative text-lg font-semibold text-slate-600">
                                 GadgetsVio &nbsp;&nbsp;
-                            </a>
+                            </Link>
                         </div>
                     </div>
                     <div className="relative p-1 flex items-center justify-end w-1/4 ml-5 mr-4 sm:mr-0 sm:right-auto">
-                        <a href="/" className="block relative">
+                        <Link to="/" className="block relative">
                             <i className="fa-solid fa-user"></i>&nbsp;&nbsp;&nbsp;&nbsp;
-                        </a>
-                        <a href="/" className="block relative">
+                        </Link>
+                        <Link to="/" className="block relative">
                             &nbsp;&nbsp;<i className="fa-solid fa-shopping-cart"></i>
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

@@ -1,5 +1,6 @@
 import React from 'react'
 import StarRating from './StarRating'
+import { Link } from 'react-router-dom'
 
 function truncate(str) {
   return str.length > 100 ? str.substring(0, 94) + "..." : str;
@@ -14,24 +15,20 @@ function ProductCard({ product }) {
       >
         <StarRating starCount={product.rating} text={`${product.rating} FROM ${product.numReviews} REVIEWS`} />
       </span>
-
-
-
-
-
+      
       <div className="w-full p-4">
         <div className="card flex flex-col justify-center p-10 bg-white rounded-lg shadow-xl">
           <div className="prod-title">
-            <a href={`/product/${product._id}`} className="text-xl uppercase text-gray-900 font-bold hover:underline">
+            <Link to={`/product/${product._id}`} className="text-xl uppercase text-gray-900 font-bold hover:underline">
               {product.name}
-            </a>
+            </Link>
             <p className="uppercase text-sm text-gray-400">
               {truncate(product.description)}
             </p>
           </div>
-          <a href={`/product/${product._id}`} className="prod-img">
+          <Link to={`/product/${product._id}`} className="prod-img">
             <img src={product.image} alt="..." className="w-full object-cover object-center h-64" />
-          </a>
+          </Link>
           <div className="prod-info grid gap-5">
             <div className="flex flex-col md:flex-row justify-between items-center text-gray-900 mt-4">
               <p className="font-bold text-xl mb-2">

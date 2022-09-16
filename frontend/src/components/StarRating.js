@@ -10,7 +10,7 @@ function StarRating({ starCount, text }) {
                 <i className={`w-full h-full text-yellow-300 hover:text-yellow-400 ${starCount >= 2 ? "fas fa-star" : starCount >= 1.5 ? "fas fa-star-half-alt" : "far fa-star"}`}></i>
             </li>
             <li>
-                <i className={`w-full h-full text-yellow-300 hover:text-yellow-400 ${starCount >= 4 ? "fas fa-star" : starCount >= 2.5 ? "fas fa-star-half-alt" : "far fa-star"}`}></i>
+                <i className={`w-full h-full text-yellow-300 hover:text-yellow-400 ${starCount >= 3 ? "fas fa-star" : starCount >= 2.5 ? "fas fa-star-half-alt" : "far fa-star"}`}></i>
             </li>
             <li>
                 <i className={`w-full h-full text-yellow-300 hover:text-yellow-400 ${starCount >= 4 ? "fas fa-star" : starCount >= 3.5 ? "fas fa-star-half-alt" : "far fa-star"}`}></i>

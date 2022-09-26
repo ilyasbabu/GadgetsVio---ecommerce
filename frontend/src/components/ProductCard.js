@@ -11,7 +11,7 @@ function ProductCard({ product }) {
     <div className="w-96 flex justify-center items-center relative ">
 
       <span
-        className="absolute z-10 inline-flex items-center px-3 py-1 text-xs font-semibold text-slate-600  bg-white rounded-md left-10 top-7"
+        className="absolute z-10 inline-flex items-center px-3 py-1 text-xs font-semibold text-slate-600 rounded-md left-11 top-7"
       >
         <StarRating starCount={product.rating} text={`${product.rating} FROM ${product.numReviews} REVIEWS`} />
       </span>

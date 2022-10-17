@@ -1,4 +1,3 @@
-from email.policy import default
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -8,7 +7,10 @@ class BaseModel(models.Model):
     is_active = models.BooleanField(default = True)
     created_time = models.DateTimeField(auto_now_add = True)
     modified_time = models.DateTimeField(auto_now = True)
-    added_by = models.ForeignKey(User, on_delete = models.SET_NULL)
+    added_by = models.ForeignKey(User, on_delete = models.CASCADE)
+
+    class Meta:
+        abstract = True
 
 
 class Product(BaseModel):
@@ -25,16 +27,8 @@ class Product(BaseModel):
     category = models.CharField(max_length = 15,choices = CATEGORY_CHOICES)
     price = models.DecimalField(max_digits = 7, decimal_places = 2)
     stock = models.IntegerField(default = 0)
-    rating = models.DecimalField(max_digits = 2, decimal_places = 1)
+    avg_rating = models.DecimalField(max_digits = 2, decimal_places = 1)
     rating_count = models.IntegerField(default = 0)
-
-    # @property
-    # def avg(self):
-    #     return 'self'
-
-    # @classmethod
-    # def update_rating(cls):
-    #     print (cls)
 
 class ProductImage(BaseModel):
     path = models.ImageField(upload_to = 'images/product')
@@ -62,7 +56,7 @@ class Order(BaseModel):
     delivered = models.BooleanField(default = False)
     delivered_at = models.DateTimeField(blank = True, null = True)
 
- 
+
 class CartItem(BaseModel):
     product = models.ForeignKey(Product, on_delete = models.CASCADE)
     order = models.ForeignKey(Order, on_delete = models.CASCADE)
@@ -70,3 +64,9 @@ class CartItem(BaseModel):
     quantity = models.IntegerField(default = 0)
 
     
+class ShippingAddress(BaseModel):
+    order = models.ForeignKey(Order, on_delete = models.CASCADE)
+    address = models.TextField()
+    city = models.CharField(max_length = 100)
+    postal_code = models.CharField(max_length = 50)
+    shipping_price = models.DecimalField(max_digits = 7, decimal_places = 2)

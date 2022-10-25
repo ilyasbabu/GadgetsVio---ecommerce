@@ -13,20 +13,20 @@ function ProductCard({ product }) {
       <span
         className="absolute z-10 inline-flex items-center px-3 py-1 text-xs font-semibold text-slate-600 rounded-md left-11 top-7"
       >
-        <StarRating starCount={product.rating} text={`${product.rating} FROM ${product.numReviews} REVIEWS`} />
+        <StarRating starCount={product.avg_rating} text={`${product.avg_rating} FROM ${product.rating_count} REVIEWS`} />
       </span>
       
       <div className="w-full p-4">
         <div className="card flex flex-col justify-center p-10 bg-white rounded-lg shadow-xl">
           <div className="prod-title">
-            <Link to={`/product/${product._id}`} className="text-xl uppercase text-gray-900 font-bold hover:underline">
+            <Link to={`/product/${product.id}`} className="text-xl uppercase text-gray-900 font-bold hover:underline">
               {product.name}
             </Link>
             <p className="uppercase text-sm text-gray-400">
               {truncate(product.description)}
             </p>
           </div>
-          <Link to={`/product/${product._id}`} className="prod-img">
+          <Link to={`/product/${product.id}`} className="prod-img">
             <img src={product.image} alt="..." className="w-full object-cover object-center h-64" />
           </Link>
           <div className="prod-info grid gap-5">

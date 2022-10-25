@@ -8,7 +8,6 @@ class BaseModel(models.Model):
     created_time = models.DateTimeField(auto_now_add = True)
     modified_time = models.DateTimeField(auto_now = True)
     added_by = models.ForeignKey(User, on_delete = models.CASCADE)
-
     class Meta:
         abstract = True
 
@@ -30,10 +29,11 @@ class Product(BaseModel):
     avg_rating = models.DecimalField(max_digits = 2, decimal_places = 1)
     rating_count = models.IntegerField(default = 0)
 
+
 class ProductImage(BaseModel):
     path = models.ImageField(upload_to = 'images/product')
     is_main = models.BooleanField(default = False)
-    product = models.ForeignKey(Product, on_delete = models.CASCADE)
+    product = models.ForeignKey(Product, on_delete = models.CASCADE, related_name= 'product_image')
 
 
 class Review(BaseModel):
@@ -63,7 +63,7 @@ class CartItem(BaseModel):
     price = models.DecimalField(max_digits = 7, decimal_places = 2)
     quantity = models.IntegerField(default = 0)
 
-    
+
 class ShippingAddress(BaseModel):
     order = models.ForeignKey(Order, on_delete = models.CASCADE)
     address = models.TextField()

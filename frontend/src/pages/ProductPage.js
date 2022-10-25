@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import Reviews from '../components/Reviews'
 import RatingCard from '../components/RatingCard'
@@ -12,11 +12,13 @@ function ProductPage() {
     let { id } = useParams();
     console.log(id);
     const product = products.find((obj) => obj._id === id)
+
+    
     return (
 
         <div>
             <Link to='/'>
-                <p className='pl-6 pt-6 md:pl-10 hover:font-semibold text-slate-600 ml-0 '><i class="fa fa-arrow-left"></i> &nbsp; GO BACK</p>
+                <p className='pl-6 pt-6 md:pl-10 hover:text-slate-800 text-slate-600 ml-0 '><i class="fa fa-arrow-left"></i> &nbsp; GO BACK</p>
             </Link>
             <section>
                 <div className="relative max-w-screen-xl px-4 py-8 mx-auto">

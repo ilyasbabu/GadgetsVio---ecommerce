@@ -19,14 +19,14 @@ function ProductCard({ product }) {
       <div className="w-full p-4">
         <div className="card flex flex-col justify-center p-10 bg-white rounded-lg shadow-xl">
           <div className="prod-title">
-            <Link to={`/product/${product.id}`} className="text-xl uppercase text-gray-900 font-bold hover:underline">
+            <Link to={`/product/${product.slug}`} className="text-xl uppercase text-gray-900 font-bold hover:underline">
               {product.name}
             </Link>
             <p className="uppercase text-sm text-gray-400">
               {truncate(product.description)}
             </p>
           </div>
-          <Link to={`/product/${product.id}`} className="prod-img">
+          <Link to={`/product/${product.slug}`} className="prod-img">
             <img src={product.image} alt="..." className="w-full object-cover object-center h-64" />
           </Link>
           <div className="prod-info grid gap-5">

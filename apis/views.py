@@ -9,5 +9,12 @@ from .serializers import *
 @api_view(('GET',))
 def complete_products(request):
     products = Product.objects.filter(is_active = True).prefetch_related('product_image')
-    serializer = ProductSerializer(products, many=True)
+    serializer = ProductListSerializer(products, many=True)
+    return Response(serializer.data)
+
+
+@api_view(('GET',))
+def get_product_detail(request,slug):
+    product = Product.objects.get(slug=slug)
+    serializer = ProductDetailSerializer(product)
     return Response(serializer.data)

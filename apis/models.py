@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 from django.contrib.auth.models import User
 
 # Create your models here.
@@ -13,6 +14,7 @@ class BaseModel(models.Model):
 
 
 class Product(BaseModel):
+    error_messages = {"slug": {"unique": "Product with exact name Already Exists"}}
     CATEGORY_CHOICES = (
         ('Mobile Phone','Mobile Phone'),
         ('Tablet','Tablet'),
@@ -28,6 +30,11 @@ class Product(BaseModel):
     stock = models.IntegerField(default = 0)
     avg_rating = models.DecimalField(max_digits = 2, decimal_places = 1)
     rating_count = models.IntegerField(default = 0)
+    slug = models.SlugField(unique=True, max_length=200, error_messages=error_messages["slug"])
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(f"{self.name}")
+        return super().save(*args, **kwargs)
 
 
 class ProductImage(BaseModel):

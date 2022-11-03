@@ -28,9 +28,9 @@ class Product(BaseModel):
     category = models.CharField(max_length = 15,choices = CATEGORY_CHOICES)
     price = models.DecimalField(max_digits = 7, decimal_places = 2)
     stock = models.IntegerField(default = 0)
-    avg_rating = models.DecimalField(max_digits = 2, decimal_places = 1)
+    avg_rating = models.DecimalField(max_digits = 2, decimal_places = 1, default = 0)
     rating_count = models.IntegerField(default = 0)
-    slug = models.SlugField(unique=True, max_length=200, error_messages=error_messages["slug"])
+    slug = models.SlugField(null=True, blank=True, unique=True, max_length=200, error_messages=error_messages["slug"])
 
     def save(self, *args, **kwargs):
         self.slug = slugify(f"{self.name}")

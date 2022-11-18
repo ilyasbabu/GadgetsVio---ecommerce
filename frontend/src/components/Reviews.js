@@ -7,7 +7,7 @@ function Reviews() {
         <div>
             <div className="text-xs text-gray-700 uppercase ">
                 <div>
-                    <div scope="col" className="py-3 font-bold text-sm">
+                    <div className="py-3 font-bold text-sm">
                         Reviews:
                     </div>
                 </div>

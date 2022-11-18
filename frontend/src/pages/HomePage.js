@@ -1,25 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import ProductCard from '../components/ProductCard'
-import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
+import { getProductListAsync, loading, showProducts } from '../features/productListSlice'
 
 function HomePage() {
-    // useEffect(() => {
-    //     window.scrollTo(0, 0)
-    // }, [])
-
-    const [products, setProducts] = useState([])
+    const products = useSelector(showProducts)
+    const dispatch = useDispatch()
     useEffect(() => {
         window.scrollTo(0, 0)
-        async function getProducts() {
-            const { data } = await axios.get('/api/products')
-            console.log(data)
-            setProducts(data)
-        }
-        getProducts()
+        dispatch(getProductListAsync())
     }, [])
+    console.log(products);
 
     return (
         <div>
+            
             <div className="grid justify-center items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-8 place-items-center ">
 
                 {products.map(product => (

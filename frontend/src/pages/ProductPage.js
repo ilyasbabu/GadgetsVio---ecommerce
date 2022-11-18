@@ -4,25 +4,18 @@ import Reviews from '../components/Reviews'
 import RatingCard from '../components/RatingCard'
 import ProductDetailCard from '../components/ProductDetailCard'
 import axios from 'axios'
-import products from '../products'
 
 function ProductPage() {
-    // useEffect(() => {
-    //     window.scrollTo(0, 0)
-    // }, [])
     let { slug } = useParams();
-    console.log(slug);
-    // const product = products.find((obj) => obj._id === slug)
     const [product, setProduct] = useState({})
     useEffect(() => {
         window.scrollTo(0, 0)
-        async function getProduct(slug){
+        async function getProduct(){
             const { data } = await axios.get(`/api/product/${slug}`)
-            console.log(data)
             setProduct(data)
         }
-        getProduct(slug)
-    }, [])
+        getProduct()
+    }, [slug])
     
     return (
         <div>

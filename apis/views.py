@@ -1,3 +1,4 @@
+import time
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import *
@@ -11,6 +12,7 @@ def complete_products(request):
             is_active = True
         ).prefetch_related('product_image').order_by("?")
     serializer = ProductListSerializer(products, many=True)
+    time.sleep(1)
     return Response(serializer.data)
 
 

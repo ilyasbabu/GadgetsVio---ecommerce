@@ -1,6 +1,6 @@
 from email.mime import image
 from rest_framework import serializers
-from .models import *
+from .models import ProductImage, Review
 
 
 
@@ -19,6 +19,13 @@ class ProductListSerializer(serializers.Serializer):
         return (image.path.url)
 
 
+class ReviewSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    rating = serializers.IntegerField()
+    heading = serializers.CharField()
+    description = serializers.CharField()
+    helpful_count = serializers.IntegerField()
+
 class ProductDetailSerializer(serializers.Serializer):
     name = serializers.CharField()
     description = serializers.CharField()
@@ -30,8 +37,13 @@ class ProductDetailSerializer(serializers.Serializer):
     brand = serializers.CharField()
     category = serializers.CharField()
     stock = serializers.IntegerField()
+    reviews = serializers.SerializerMethodField()
 
     def get_image(self, obj):
         image = ProductImage.objects.filter(id = obj.id, is_main = True)
         image = image[0]
         return (image.path.url)
+
+    def get_reviews(self, obj):
+        reviews = Review.objects.filter(is_active=True, product = obj)
+        return ReviewSerializer(reviews, many=True).data

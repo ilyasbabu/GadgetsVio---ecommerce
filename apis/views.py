@@ -7,9 +7,9 @@ from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from django.utils.translation import gettext as _
-from .models import *
+from .models import Product
 from django.core.exceptions import ValidationError
-from .serializers import *
+from .serializers import ProductListSerializer, ProductDetailSerializer
 
 
 # Create your views here.
@@ -45,14 +45,9 @@ class ProductDetailPageAPI(APIView):
 
     authentication_classes = [SessionAuthentication]
 
-    def get(self, request):
+    def get(self, request, slug):
         product = Product.objects.get(slug=slug)
         serializer = ProductDetailSerializer(product)
+        time.sleep(0.5)
+
         return Response(serializer.data)
-
-
-@api_view(['GET'])
-def get_product_detail(request,slug):
-    product = Product.objects.get(slug=slug)
-    serializer = ProductDetailSerializer(product)
-    return Response(serializer.data)

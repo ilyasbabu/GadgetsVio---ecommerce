@@ -13,6 +13,9 @@ export const productDetailSlice = createSlice({
     name: 'product_detail',
     initialState,
     reducers:{
+        get_product_detail_request: (state, action) => {
+            state.loading = true
+        },
         get_product_detail : (state, action) => {
             state.data = action.payload
             state.loading = false
@@ -26,6 +29,7 @@ export const productDetailSlice = createSlice({
 
 export const getProductDetailAsync = (slug) => async (dispatch) => {
     try{
+        dispatch(get_product_detail_request())
         const response = await axios.get(`/api/product/${slug}`);
         dispatch(get_product_detail(response.data));
     } catch(err){
@@ -34,4 +38,4 @@ export const getProductDetailAsync = (slug) => async (dispatch) => {
 };
 
 export default productDetailSlice.reducer
-export const { get_product_detail, error_throw } = productDetailSlice.actions
+export const { get_product_detail_request, get_product_detail, error_throw } = productDetailSlice.actions

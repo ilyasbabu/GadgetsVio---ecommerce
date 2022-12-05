@@ -38,7 +38,19 @@ function ProductPage() {
                                         <RatingCard />
                                     </div>
                                     <article className='px-4 mt-4' id='reviewsA'>
-                                        <Reviews />
+                                        <div className="text-xs text-gray-700 uppercase ">
+                                            <div>
+                                                <div className="py-3 font-bold text-sm">
+                                                    Reviews:
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {product.reviews.map(review => (
+                                            <>
+                                                <Reviews review={review} />
+                                                <hr />
+                                            </>
+                                        ))}
                                     </article>
                                 </div>
                             </section>

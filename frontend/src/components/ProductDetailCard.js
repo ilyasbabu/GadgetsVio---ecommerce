@@ -1,7 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import StarRating from './StarRating'
 
+
 function ProductDetailCard({ product }) {
+    const [qty, setQty] = useState(1)
+    const navigate = useNavigate();
+    const decreaseQty = () => {
+        if (qty <= 0) {
+            return
+        } else {
+            setQty(qty - 1);
+        }
+    }
+    const increaseQty = () => {
+        if (qty >= product.stock) {
+            return
+        } else {
+            setQty(qty + 1);
+        }
+    }
+    const addToCartHandler = () => {
+        console.log("add to cart",product.slug);
+        navigate(`/cart/${product.slug}?qty=${qty}`)
+    }
     return (
         <div className="grid items-start grid-cols-1 gap-8 md:grid-cols-2 mb-4">
             <div className="grid grid-cols-1 gap-4 ">
@@ -82,47 +104,60 @@ function ProductDetailCard({ product }) {
                             </table>
                         </div>
                     </div>
-                    <div className='flex mt-8'>
-                        <div>
-                            <p className='text-xs p-2 px-4'>
-                                Qty:
-                            </p>
+                    <div className='flex mt-8 justify-between mx-3'>
+                        <div className={`${product.stock ? "flex" : "hidden"}`}>
+                            <div>
+                                <p className='text-base p-2 px-4'>
+                                    Qty :
+                                </p>
+                            </div>
+                            <div>
+                                <button
+                                    className='w-10 py-2 text-lg text-center border-gray-500 rounded '
+                                    type='button'
+                                    onClick={decreaseQty}>
+                                    -
+                                </button>
+                            </div>
+                            <div>
+                                <label className="sr-only">Qty</label>
+                                <input
+                                    type="number"
+                                    id="quantity"
+                                    value={qty}
+                                    onChange={() => { }}
+                                    disabled
+                                    className="w-12 py-3 text-xs text-center border border-gray-500 rounded [-moz-appearance:_textfield] [&::-webkit-outer-spin-button]:m-0 [&::-webkit-inner-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                />
+                            </div>
+                            <div>
+                                <button
+                                    className='w-10 py-2 text-lg text-center border-gray-500 rounded '
+                                    type='button'
+                                    onClick={increaseQty}>
+                                    +
+                                </button>
+                            </div>
                         </div>
                         <div>
-                            <button className='border p-1 px-4'>
-                                -
-                            </button>
-                        </div>
-                        <div>
-                            <p className='border p-1 px-4'>
-                                1
-                            </p>
-                        </div>
-                        <div>
-                            <button className='border p-1 px-4'>
-                                +
-                            </button>
+                            <div className='w-full'>
+                                <p className={`py-2 text-lg font-semibold  ${product.stock ? "text-blue-900" : "text-red-900"}`}>
+                                    {product.stock ? `${product.stock} items available in stock` : "Product not available at the moment"}
+                                </p>
+                            </div>
                         </div>
                     </div>
                     <div className="flex mt-8">
-                        <div>
-                            <label className="sr-only">Qty</label>
-                            <input
-                                type="number"
-                                id="quantity"
-                                min="1"
-                                defaultValue="1"
-                                className="w-12 py-3 text-xs text-center border border-gray-500 rounded [-moz-appearance:_textfield] [&::-webkit-outer-spin-button]:m-0 [&::-webkit-inner-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                            />
-                        </div>
                         <button
-                            type="submit"
-                            className=" w-full block px-5 py-3 ml-3 text-xs font-medium text-white bg-green-600 rounded hover:bg-green-500"
+                            type="button"
+                            disabled={product.stock ? false : true}
+                            className={`w-full block px-5 py-3 ml-3 text-xs font-medium text-white rounded ${product.stock ? "bg-green-600 hover:bg-green-500" : "bg-gray-500 hover:bg-gray-400"}`}
+                            onClick={addToCartHandler}
                         >
                             Add to Cart &nbsp; <i className="fa fa-cart-shopping"></i>
                         </button>
                         <button
-                            type="submit"
+                            type="button"
                             className="w-full block px-5 py-3 ml-3 text-xs font-medium text-pink-600 hover:text-white bg-white border border-pink-700 rounded hover:bg-pink-500"
                         >
                             Wishlist &nbsp; <i className="fa-regular fa-heart"></i>

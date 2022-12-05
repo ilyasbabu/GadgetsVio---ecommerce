@@ -46,10 +46,10 @@ function ProductPage() {
                                             </div>
                                         </div>
                                         {product.reviews.map(review => (
-                                            <>
+                                            <div key={review.id}>
                                                 <Reviews review={review} />
                                                 <hr />
-                                            </>
+                                            </div>
                                         ))}
                                     </article>
                                 </div>

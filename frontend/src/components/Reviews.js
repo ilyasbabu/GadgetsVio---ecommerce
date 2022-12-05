@@ -8,7 +8,7 @@ function Reviews({ review }) {
             <div className="flex items-center mb-4 space-x-4">
                 <img className="w-10 h-10 rounded-full" src='/images/avatar.png' alt="" />
                 <div className="space-y-1 font-medium ">
-                    <p>{review.by} <p className="block text-sm text-gray-500 ">Added on {review.created_time}</p></p>
+                    <p>{review.by} <span className="block text-sm text-gray-500 ">Added on {review.created_time}</span></p>
                 </div>
             </div>
             <div className="flex items-center mb-1">

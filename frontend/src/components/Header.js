@@ -33,7 +33,7 @@ function Header() {
                         <Link to="/" className="block relative">
                             Login &nbsp;&nbsp;<i className="fa-solid fa-user"></i>&nbsp;&nbsp;
                         </Link>
-                        <Link to="/" className="block relative">
+                        <Link to="/cart/" className="block relative">
                             Cart &nbsp;&nbsp;<i className="fa-solid fa-shopping-cart"></i>&nbsp;&nbsp;
                         </Link>
                     </div>

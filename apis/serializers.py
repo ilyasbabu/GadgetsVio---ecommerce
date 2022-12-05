@@ -25,6 +25,8 @@ class ReviewSerializer(serializers.Serializer):
     heading = serializers.CharField()
     description = serializers.CharField()
     helpful_count = serializers.IntegerField()
+    by = serializers.CharField(source="added_by.username")
+    created_time = serializers.DateTimeField(format="%B %Y")
 
 class ProductDetailSerializer(serializers.Serializer):
     name = serializers.CharField()

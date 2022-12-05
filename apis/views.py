@@ -1,7 +1,7 @@
 import time
 import sys
 import traceback
-from rest_framework.decorators import api_view
+import json
 from rest_framework.response import Response
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -10,7 +10,11 @@ from django.utils.translation import gettext as _
 from .models import Product
 from django.core.exceptions import ValidationError
 from .serializers import ProductListSerializer, ProductDetailSerializer
+from .services import get_product_detail, get_product_list, handle_error
 
+from django.core.exceptions import ValidationError as DjangoValidationError
+from rest_framework.exceptions import ValidationError as DRFValidationError
+from rest_framework.views import exception_handler as drf_exception_handler
 
 # Create your views here.
 
@@ -23,21 +27,13 @@ class HomePageAPI(APIView):
 
     def get(self, request):
         try:
-            products = Product.objects.filter(
-                    is_active = True
-                ).prefetch_related('product_image').order_by("?")
-            serializer = ProductListSerializer(products, many=True)
+            result = get_product_list()
+            serializer = ProductListSerializer(result, many=True)
             time.sleep(0.5)
-            # raise ValidationError("Something went wrong!")
             return Response(serializer.data)
         except Exception as e:
-            msg = e
-            error_info = "\n".join(traceback.format_exception(*sys.exc_info()))
-            print(error_info)
-            if isinstance(e, ValidationError):
-                error_info = "\n".join(e.messages)
-                msg = error_info
-            return Response(msg,status=400)
+            result = handle_error(e)
+            return Response(json.dumps(str(result)),status=400)
 
 
 class ProductDetailPageAPI(APIView):
@@ -46,8 +42,11 @@ class ProductDetailPageAPI(APIView):
     authentication_classes = [SessionAuthentication]
 
     def get(self, request, slug):
-        product = Product.objects.get(slug=slug)
-        serializer = ProductDetailSerializer(product)
-        time.sleep(0.5)
-
-        return Response(serializer.data)
+        try:
+            result = get_product_detail(slug)
+            serializer = ProductDetailSerializer(result)
+            time.sleep(0.5)
+            return Response(serializer.data)
+        except Exception as e:
+            result = handle_error(e)
+            return Response(json.dumps(str(result)),status=400)

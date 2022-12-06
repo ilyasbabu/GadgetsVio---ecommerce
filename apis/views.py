@@ -9,7 +9,7 @@ from rest_framework.views import APIView
 from django.utils.translation import gettext as _
 from .models import Product
 from django.core.exceptions import ValidationError
-from .serializers import ProductListSerializer, ProductDetailSerializer
+from .serializers import ProductListSerializer, ProductDetailSerializer, ProductBasicDetailSerializer
 from .services import get_product_detail, get_product_list, handle_error
 
 from django.core.exceptions import ValidationError as DjangoValidationError
@@ -45,6 +45,22 @@ class ProductDetailPageAPI(APIView):
         try:
             result = get_product_detail(slug)
             serializer = ProductDetailSerializer(result)
+            time.sleep(0.5)
+            return Response(serializer.data)
+        except Exception as e:
+            result = handle_error(e)
+            return Response(json.dumps(str(result)),status=400)
+
+
+class ProductBasicDetailAPI(APIView):
+    """API for product basic details"""
+
+    authentication_classes = [SessionAuthentication]
+
+    def get(self, request, slug):
+        try:
+            result = get_product_detail(slug)
+            serializer = ProductBasicDetailSerializer(result)
             time.sleep(0.5)
             return Response(serializer.data)
         except Exception as e:

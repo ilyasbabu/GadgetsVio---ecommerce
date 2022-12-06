@@ -20,5 +20,5 @@ def get_product_list():
 
 
 def get_product_detail(slug):
-    product = Product.objects.filter(slug=slug)
-    return product[0]
+    product = Product.objects.get(slug=slug)
+    return product

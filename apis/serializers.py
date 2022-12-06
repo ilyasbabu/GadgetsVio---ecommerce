@@ -49,3 +49,16 @@ class ProductDetailSerializer(serializers.Serializer):
     def get_reviews(self, obj):
         reviews = Review.objects.filter(is_active=True, product = obj)
         return ReviewSerializer(reviews, many=True).data
+
+class ProductBasicDetailSerializer(serializers.Serializer):
+    name = serializers.CharField()
+    price = serializers.DecimalField(max_digits=7, decimal_places=2)
+    slug = serializers.SlugField()
+    image = serializers.SerializerMethodField()
+    stock = serializers.IntegerField()
+
+    def get_image(self, obj):
+        image = ProductImage.objects.filter(id = obj.id, is_main = True)
+        image = image[0]
+        return (image.path.url)
+

@@ -30,7 +30,7 @@ export const productDetailSlice = createSlice({
 export const getProductDetailAsync = (slug) => async (dispatch) => {
     try{
         dispatch(get_product_detail_request())
-        const response = await axios.get(`/api/product/${slug}`);
+        const response = await axios.get(`/api/product/detail/${slug}`);
         dispatch(get_product_detail(response.data));
     } catch(err){
         dispatch(error_throw(err.response.data))

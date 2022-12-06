@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import StarRating from './StarRating'
+import { addToCart } from '../features/cartSlice'
 
 
 function ProductDetailCard({ product }) {
     const [qty, setQty] = useState(1)
     const navigate = useNavigate();
+    const dispatch = useDispatch()
     const decreaseQty = () => {
         if (qty <= 0) {
             return
@@ -22,7 +25,8 @@ function ProductDetailCard({ product }) {
     }
     const addToCartHandler = () => {
         console.log("add to cart",product.slug);
-        navigate(`/cart/${product.slug}?qty=${qty}`)
+        dispatch(addToCart(product.slug,qty));
+        // navigate(`/cart/${product.slug}?qty=${qty}`);
     }
     return (
         <div className="grid items-start grid-cols-1 gap-8 md:grid-cols-2 mb-4">

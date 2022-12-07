@@ -6,13 +6,13 @@ function CartItemCard() {
             <div className='flex md:flex-row justify-between pb-6 flex-col'>
                 <div className='md:w-1/4'>
                     <div className='w-full'>
-                        <img src="https://i.ibb.co/6gzWwSq/Rectangle-20-1.png" alt="Black Leather Purse" class="h-full object-center object-cover" />
+                        <img src="https://i.ibb.co/6gzWwSq/Rectangle-20-1.png" alt="Black Leather Purse" className="h-full object-center object-cover" />
                     </div>
                 </div>
                 <div className='flex flex-col justify-between'>
-                    <p class="text-xs leading-3 text-gray-800 dark:text-gray-100  md:pt-0 pt-4">Added on 21-23-1222</p>
-                    <div class="flex items-center justify-between w-full">
-                        <p class="text-base font-black leading-none text-gray-800 dark:text-gray-300 ">Luxe card holder 4546GB 34</p>
+                    <p className="text-xs leading-3 text-gray-800 dark:text-gray-100  md:pt-0 pt-4">Added on 21-23-1222</p>
+                    <div className="flex items-center justify-between w-full">
+                        <p className="text-base font-black leading-none text-gray-800 dark:text-gray-300 ">Luxe card holder 4546GB 34</p>
                         <div className='md:hidden block '>
                             <button
                                 className='w-10 py-2 md:mx-4 text-lg dark:text-white text-center rounded hover:text-black hover:md:scale-125 transition ease-in-out duration-500'
@@ -37,17 +37,17 @@ function CartItemCard() {
                             </button>
                         </div>
                     </div>
-                    <p class="text-xs leading-3 text-gray-600 dark:text-gray-400 pt-2">Height: 10 inches</p>
-                    <p class="text-xs leading-3 text-gray-600 dark:text-gray-400 py-4">Color: Black</p>
-                    <p class="w-96 text-xs leading-3 text-gray-600 dark:text-gray-400">Composition: 100% calf leather</p>
-                    <div class="flex items-center justify-between pt-5">
-                        <div class="flex justify-between w-full">
+                    <p className="text-xs leading-3 text-gray-600 dark:text-gray-400 pt-2">Height: 10 inches</p>
+                    <p className="text-xs leading-3 text-gray-600 dark:text-gray-400 py-4">Color: Black</p>
+                    <p className="w-96 text-xs leading-3 text-gray-600 dark:text-gray-400">Composition: 100% calf leather</p>
+                    <div className="flex items-center justify-between pt-5">
+                        <div className="flex justify-between w-full">
                             <div className='flex'>
-                                <p class="text-xs leading-3 underline text-gray-800 dark:text-gray-200 cursor-pointer">Add to favorites</p>
-                                <p class="text-xs leading-3 underline text-red-500 pl-5 cursor-pointer">Remove</p>
+                                <p className="text-xs leading-3 underline text-gray-800 dark:text-gray-200 cursor-pointer">Add to favorites</p>
+                                <p className="text-xs leading-3 underline text-red-500 pl-5 cursor-pointer">Remove</p>
                             </div>
                             <div>
-                                <p class="md:hidden text-lg font-black leading-none text-gray-800 dark:text-gray-100">$ 1000</p>
+                                <p className="md:hidden text-lg font-black leading-none text-gray-800 dark:text-gray-100">$ 1000</p>
                             </div>
                         </div>
                     </div>
@@ -77,7 +77,7 @@ function CartItemCard() {
                         </button>
                     </div>
                     <div className='w-full'>
-                        <p class="pt-4 text-xl font-black text-center leading-none text-gray-800">$ 1000</p>
+                        <p className="pt-4 text-xl font-black text-center leading-none text-gray-800">$ 1000</p>
                     </div>
                 </div>
 

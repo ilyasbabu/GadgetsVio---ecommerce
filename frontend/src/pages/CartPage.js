@@ -13,7 +13,7 @@ function CartPage() {
                 <div className='h-full'>
                     <div className='lg:px-72 md:px-7 px-4 lg:py-20 md:py-10 py-6'>
                         <div className='pb-6 md:pb-14'>
-                            <p class="lg:text-4xl text-3xl font-black leading-9 text-gray-800 ">Cart</p>
+                            <p class="lg:text-4xl text-3xl font-black leading-9 text-gray-800 dark:text-gray-50">Cart</p>
                         </div>
                         <CartItemCard />
                         <CartItemCard />

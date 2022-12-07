@@ -18,7 +18,7 @@ function StarRating({ starCount, text }) {
             <li>
                 <i className={`w-full h-full text-yellow-400 hover:text-yellow-500 ${starCount >= 5 ? "fas fa-star" : starCount >= 4.5 ? "fas fa-star-half-alt" : "far fa-star"}`}>&nbsp;</i>
             </li>
-            <li className="ml-2 text-xs text-gray-600">{text && text}</li>
+            <li className="ml-2 text-xs text-gray-600 dark:text-white">{text && text}</li>
         </ul>
     )
 }

@@ -7,7 +7,7 @@ function Reviews({ review }) {
         <div className='py-5'>
             <div className="flex items-center mb-4 space-x-4">
                 <img className="w-10 h-10 rounded-full" src='/images/avatar.png' alt="" />
-                <div className="space-y-1 font-medium ">
+                <div className="space-y-1 font-medium dark:text-gray-200">
                     <p>{review.by} <span className="block text-sm text-gray-500 ">Added on {review.created_time}</span></p>
                 </div>
             </div>
@@ -21,9 +21,8 @@ function Reviews({ review }) {
                 </p>
             </footer>
             <p className="mb-2 font-light text-gray-500 dark:text-gray-400">{review.description}</p>
-            {/* <a href="/" className="block mb-5 text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">Read more</a> */}
             <aside>
-                <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                <p className="mt-1 text-xs text-gray-500 dark:text-gray-200">
                     {review.helpful_count ? review.helpful_count : "No"} people found this review helpful
                 </p>
                 <div className="flex items-center mt-3 space-x-3 divide-x divide-gray-200 dark:divide-gray-600">

@@ -27,7 +27,7 @@ function ProductPage() {
                         :
                         <div>
                             <Link to='/'>
-                                <p className='pl-6 pt-6 md:pl-10 hover:text-slate-800 text-slate-600 ml-0 '><i className="fa fa-arrow-left"></i> &nbsp; GO BACK</p>
+                                <p className='pl-6 pt-6 md:pl-10 hover:text-slate-800 text-slate-600 dark:text-gray-200 dark:hover:text-gray-100 ml-0 '><i className="fa fa-arrow-left"></i> &nbsp; GO BACK</p>
                             </Link>
                             <section>
                                 <div className="relative max-w-screen-xl px-4 py-8 mx-auto">
@@ -40,7 +40,7 @@ function ProductPage() {
                                     <article className='px-4 mt-4' id='reviewsA'>
                                         <div className="text-xs text-gray-700 uppercase ">
                                             <div>
-                                                <div className="py-3 font-bold text-sm">
+                                                <div className="py-3 font-bold text-sm dark:text-gray-200">
                                                     Reviews:
                                                 </div>
                                             </div>

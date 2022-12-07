@@ -24,8 +24,8 @@ function ProductDetailCard({ product }) {
         }
     }
     const addToCartHandler = () => {
-        console.log("add to cart",product.slug);
-        dispatch(addToCart(product.slug,qty));
+        console.log("add to cart", product.slug);
+        dispatch(addToCart(product.slug, qty));
         // navigate(`/cart/${product.slug}?qty=${qty}`);
     }
     return (
@@ -108,50 +108,56 @@ function ProductDetailCard({ product }) {
                             </table>
                         </div>
                     </div>
-                    <div className='flex mt-8 justify-between mx-3'>
-                        <div className={`${product.stock ? "flex" : "hidden"}`}>
-                            <div>
-                                <p className='text-base p-2 px-4'>
-                                    Qty :
-                                </p>
-                            </div>
-                            <div>
-                                <button
-                                    className='w-10 py-2 text-lg text-center border-gray-500 rounded '
-                                    type='button'
-                                    onClick={decreaseQty}>
-                                    -
-                                </button>
-                            </div>
-                            <div>
-                                <label className="sr-only">Qty</label>
-                                <input
-                                    type="number"
-                                    id="quantity"
-                                    value={qty}
-                                    onChange={() => { }}
-                                    disabled
-                                    className="w-12 py-3 text-xs text-center border border-gray-500 rounded [-moz-appearance:_textfield] [&::-webkit-outer-spin-button]:m-0 [&::-webkit-inner-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                                />
-                            </div>
-                            <div>
-                                <button
-                                    className='w-10 py-2 text-lg text-center border-gray-500 rounded '
-                                    type='button'
-                                    onClick={increaseQty}>
-                                    +
-                                </button>
-                            </div>
-                        </div>
+                    <div>
+                        {
+                            product.stock ?
+                                <table className="w-full text-sm text-left text-gray-500 ">
+                                    <thead className="text-xs text-gray-700 uppercase ">
+                                        <tr>
+                                            <th scope="col" className="md:py-3 px-4 text-sm">
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr className="bg-white ">
+                                            <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap ">
+                                                Select Quantity:
+                                            </th>
+                                            <td className="py-4 px-6">
+                                                <button
+                                                    className='w-10 py-2 md:mx-4 text-lg text-center rounded hover:text-black hover:md:scale-125 transition ease-in-out duration-500'
+                                                    type='button'
+                                                    onClick={decreaseQty}>
+                                                    &#8722;
+                                                </button>
+                                                <input
+                                                    type="number"
+                                                    value={qty}
+                                                    onChange={() => { }}
+                                                    disabled
+                                                    className="w-16 py-2 text-base text-center border border-gray-800 rounded [-moz-appearance:_textfield] [&::-webkit-outer-spin-button]:m-0 [&::-webkit-inner-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                                />
+                                                <button
+                                                    className='w-10 py-2 md:mx-4 text-lg text-center rounded hover:text-black hover:md:scale-125 transition ease-in-out duration-500'
+                                                    type='button'
+                                                    onClick={increaseQty}>
+                                                    &#43;
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                : <></>
+                        }
+                    </div>
+                    <div className='mx-5 md:mt-1'>
                         <div>
-                            <div className='w-full'>
-                                <p className={`py-2 text-lg font-semibold  ${product.stock ? "text-blue-900" : "text-red-900"}`}>
-                                    {product.stock ? `${product.stock} items available in stock` : "Product not available at the moment"}
-                                </p>
-                            </div>
+                            <p className={`py-2 text-sm font-semibold  ${product.stock ? "text-blue-900" : "text-red-900"}`}>
+                                {product.stock ? `${product.stock} items currently available in stock` : "Product not available at the moment"}
+                            </p>
                         </div>
                     </div>
-                    <div className="flex mt-8">
+                    <div className="flex mt-6">
                         <button
                             type="button"
                             disabled={product.stock ? false : true}

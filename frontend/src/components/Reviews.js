@@ -27,7 +27,7 @@ function Reviews({ review }) {
                     {review.helpful_count ? review.helpful_count : "No"} people found this review helpful
                 </p>
                 <div className="flex items-center mt-3 space-x-3 divide-x divide-gray-200 dark:divide-gray-600">
-                    <a href="/" className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-xs px-2 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">Helpful</a>
+                    <a href="/" className="border focus:outline-none font-medium rounded-lg text-xs px-2 py-1.5 bg-gray-800 text-white border-gray-600 hover:bg-gray-700 hover:border-gray-600 focus:ring-gray-700">Helpful</a>
                     <a href="/" className="pl-4 text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">Report abuse</a>
                 </div>
             </aside>

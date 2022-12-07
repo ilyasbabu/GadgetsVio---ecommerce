@@ -1,0 +1,34 @@
+import React from 'react'
+
+function CartSummarySection() {
+    return (
+        <div className='lg:w-96 w-full bg-gray-100 dark:bg-gray-900 h-full right-0 lg:fixed'>
+            <div class="flex flex-col lg:w-96 w-full lg:h-screen h-auto lg:px-8 md:px-7 px-4 lg:py-20 md:py-10 py-6 justify-between overflow-y-auto ">
+                <div>
+                    <p class="lg:text-4xl text-3xl font-black leading-9 text-gray-800 dark:text-white">Summary</p>
+                    <div class="flex items-center justify-between pt-16">
+                        <p class="text-base leading-none text-gray-800 dark:text-white">Subtotal</p>
+                        <p class="text-base leading-none text-gray-800 dark:text-white">000</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-5">
+                        <p class="text-base leading-none text-gray-800 dark:text-white">Shipping</p>
+                        <p class="text-base leading-none text-gray-800 dark:text-white">000</p>
+                    </div>
+                    <div class="flex items-center justify-between pt-5">
+                        <p class="text-base leading-none text-gray-800 dark:text-white">Tax</p>
+                        <p class="text-base leading-none text-gray-800 dark:text-white">000</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex items-center pb-6 justify-between lg:pt-5 pt-20">
+                        <p class="text-2xl leading-normal text-gray-800 dark:text-white">Total</p>
+                        <p class="text-2xl font-bold leading-normal text-right text-gray-800 dark:text-white">$ 240000</p>
+                    </div>
+                    <button onclick="" class="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white dark:hover:bg-gray-700">Checkout</button>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default CartSummarySection

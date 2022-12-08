@@ -6,7 +6,7 @@ const initialState = {
     cartItems: [],
     total_price: 0,
     total_qty: 0,
-    loading: true,
+    loading: false,   // change
     error_: 0
 }
 
@@ -34,7 +34,10 @@ export const cartItemsSlice = createSlice({
             state.cartItems.map(x => {
                 state.total_qty += x.qty
                 state.total_price += x.price * x.qty
+                return null
             });
+            localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
+            state.loading = false
         },
         error_throw: (state, action) => {
             state.error_ = action.payload

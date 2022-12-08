@@ -1,12 +1,26 @@
 import React from 'react'
 import StarRating from './StarRating'
 import { Link } from 'react-router-dom'
+import { addToCart } from '../features/cartSlice'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 function truncate(str) {
   return str.length > 100 ? str.substring(0, 94) + "..." : str;
 }
 
+function truncate24(str) {
+  return str.length > 26 ? str.substring(0, 20) + ".." : str;
+}
+
 function ProductCard({ product }) {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const addToCartHandler = () => {
+    console.log("add to cart", product.slug);
+    dispatch(addToCart(product.slug, 1));
+    navigate(`/cart/${product.slug}?qty=${1}`);
+  }
   return (
     <div className="w-96 flex justify-center items-center relative">
       <span
@@ -18,7 +32,7 @@ function ProductCard({ product }) {
         <div className="card flex flex-col justify-center p-10 bg-white dark:bg-gray-900 rounded-lg shadow-xl">
           <div className="prod-title">
             <Link to={`/product/${product.slug}`} className="text-xl uppercase text-gray-900 dark:text-white font-bold hover:underline">
-              {product.name}
+              {truncate24(product.name)}
             </Link>
             <p className="uppercase text-sm text-gray-400">
               {truncate(product.description)}
@@ -33,7 +47,9 @@ function ProductCard({ product }) {
                 $ {product.price}
               </p>
               <button
-                className="px-6 py-2 transition ease-in duration-200 uppercase rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none dark:text-white dark:border-white">
+                className="px-6 py-2 transition ease-in duration-200 uppercase rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none dark:text-white dark:border-white"
+                onClick={addToCartHandler}
+              >
                 Add to cart <i className="fas fa-cart-shopping"></i>
               </button>
             </div>

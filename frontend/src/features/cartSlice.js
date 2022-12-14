@@ -18,7 +18,7 @@ export const cartItemsSlice = createSlice({
             state.loading = true
         },
         get_cart_items: (state, action) => {
-            // state.data = action.payload
+            state.cartItems = action.payload
             state.loading = false
         },
         add_cart_item: (state, action) => {
@@ -46,12 +46,15 @@ export const cartItemsSlice = createSlice({
     },
 });
 
-export const getCartItemsAsync = (slug) => async (dispatch) => {
+export const getCartItemsAsync = () => async (dispatch) => {
     try {
-        dispatch(get_cart_items_request())
-        const response = await axios.get(`/api/product/${slug}`);
-        dispatch(get_cart_items(response.data));
+        // dispatch(get_cart_items_request())
+        // const response = await axios.get(`/api/product/${slug}`);
+        const items = localStorage.getItem('cartItems')
+        console.log(items);
+        dispatch(get_cart_items(JSON.parse(items)));
     } catch (err) {
+        console.log(err);
         dispatch(error_throw(err.response.data))
     }
 };

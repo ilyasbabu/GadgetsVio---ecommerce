@@ -17,7 +17,7 @@ function HomePage() {
     console.log(products);
 
     return (
-        <div>
+        <div className='min-h-screen'>
             {/* <section>
                 <div className="max-w-screen-2xl px-4 py-8 mx-auto sm:px-6 sm:py-12 lg:px-8">
                     <header className="text-center">

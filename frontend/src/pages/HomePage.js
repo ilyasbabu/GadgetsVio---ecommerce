@@ -98,7 +98,6 @@ function HomePage() {
                         ))}
                     </div>
             }
-
         </div>
     )
 }

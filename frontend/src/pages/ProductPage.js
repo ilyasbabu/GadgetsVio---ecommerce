@@ -5,57 +5,64 @@ import RatingCard from '../components/RatingCard'
 import ProductDetailCard from '../components/ProductDetailCard'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProductDetailAsync } from '../features/productDetailSlice'
+import { setInitialState } from '../features/commonSlice'
 import Loading from '../components/Loading'
 import ErrorCard from '../components/ErrorCard'
+import SuccessCard from '../components/SuccessCard'
 
 function ProductPage() {
     let { slug } = useParams();
-    const { data, error_, loading } = useSelector(state => state.product_detail)
+    const { data, loading } = useSelector(state => state.product_detail)
+    const { message, type } = useSelector(state => state.commons)
     const product = data
 
     const dispatch = useDispatch()
     useEffect(() => {
         window.scrollTo(0, 0)
         dispatch(getProductDetailAsync(slug))
-    }, [slug])
+        return () => {
+            dispatch(setInitialState())
+        }
+    }, [dispatch, slug])
 
     return (
-        <div>
+        <div className='min-h-screen'>
+            {loading && <Loading />}
             {
-                loading ? <Loading />
-                    : error_ ? <ErrorCard message={error_} />
-                        :
-                        <div>
-                            <Link to='/'>
-                                <p className='pl-6 pt-6 md:pl-10 hover:text-slate-800 text-slate-600 dark:text-gray-200 dark:hover:text-gray-100 ml-0 '><i className="fa fa-arrow-left"></i> &nbsp; GO BACK</p>
-                            </Link>
-                            <section>
-                                <div className="relative max-w-screen-xl px-4 py-8 mx-auto">
-                                    <div>
-                                        <ProductDetailCard product={product} />
-                                    </div>
-                                    <div>
-                                        <RatingCard />
-                                    </div>
-                                    <article className='px-4 mt-4' id='reviewsA'>
-                                        <div className="text-xs text-gray-700 uppercase ">
-                                            <div>
-                                                <div className="py-3 font-bold text-sm dark:text-gray-200">
-                                                    Reviews:
-                                                </div>
+                type !== "error" &&
+                    <div>
+                        <Link to='/'>
+                            <p className='pl-6 pt-6 md:pl-10 hover:text-slate-800 text-slate-600 dark:text-gray-200 dark:hover:text-gray-100 ml-0 '><i className="fa fa-arrow-left"></i> &nbsp; GO BACK</p>
+                        </Link>
+                        <section>
+                            <div className="relative max-w-screen-xl px-4 py-8 mx-auto">
+                                <div>
+                                    <ProductDetailCard product={product} />
+                                </div>
+                                <div>
+                                    <RatingCard />
+                                </div>
+                                <article className='px-4 mt-4' id='reviewsA'>
+                                    <div className="text-xs text-gray-700 uppercase ">
+                                        <div>
+                                            <div className="py-3 font-bold text-sm dark:text-gray-200">
+                                                Reviews:
                                             </div>
                                         </div>
-                                        {product.reviews.map(review => (
-                                            <div key={review.id}>
-                                                <Reviews review={review} />
-                                                <hr />
-                                            </div>
-                                        ))}
-                                    </article>
-                                </div>
-                            </section>
-                        </div>
+                                    </div>
+                                    {product.reviews.map(review => (
+                                        <div key={review.id}>
+                                            <Reviews review={review} />
+                                            <hr />
+                                        </div>
+                                    ))}
+                                </article>
+                            </div>
+                        </section>
+                    </div>
             }
+            {message && type === "success" && <SuccessCard message={message} />}
+            {message && type === "error" && <ErrorCard message={message} />}
         </div>
     )
 }

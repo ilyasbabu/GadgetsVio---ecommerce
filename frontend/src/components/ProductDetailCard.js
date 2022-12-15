@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import StarRating from './StarRating'
 import { addToCart } from '../features/cartSlice'
+import { showSuccessMessage } from '../features/commonSlice'
 
 
 function ProductDetailCard({ product }) {
     const [qty, setQty] = useState(1)
     const navigate = useNavigate();
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const decreaseQty = () => {
         if (qty <= 0) {
             return
@@ -24,9 +25,11 @@ function ProductDetailCard({ product }) {
         }
     }
     const addToCartHandler = () => {
-        console.log("add to cart", product.slug);
         dispatch(addToCart(product.slug, qty));
-        // navigate(`/cart/${product.slug}?qty=${qty}`);
+        dispatch(showSuccessMessage("Item added to cart Successfully"))
+        setTimeout(function () {
+            navigate(`/cart/${product.slug}?qty=${qty}`);
+        }, 1500);
     }
     return (
         <div className="grid items-start grid-cols-1 gap-8 md:grid-cols-2 mb-4">
@@ -110,44 +113,43 @@ function ProductDetailCard({ product }) {
                     </div>
                     <div>
                         {
-                            product.stock ?
-                                <table className="w-full text-sm text-left text-gray-500 ">
-                                    <thead className="text-xs text-gray-700 uppercase ">
-                                        <tr>
-                                            <th scope="col" className="md:py-3 px-4 text-sm">
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr className="">
-                                            <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-gray-300">
-                                                Select Quantity:
-                                            </th>
-                                            <td className="py-4 px-6">
-                                                <button
-                                                    className='w-10 py-2 md:mx-4 text-lg text-center rounded dark:text-white hover:text-black hover:md:scale-125 transition ease-in-out duration-500'
-                                                    type='button'
-                                                    onClick={decreaseQty}>
-                                                    &#8722;
-                                                </button>
-                                                <input
-                                                    type="number"
-                                                    value={qty}
-                                                    onChange={() => { }}
-                                                    disabled
-                                                    className="w-16 py-2 text-base text-center border dark:bg-gray-700 dark:text-white border-gray-800 rounded [-moz-appearance:_textfield] [&::-webkit-outer-spin-button]:m-0 [&::-webkit-inner-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                                                />
-                                                <button
-                                                    className='w-10 py-2 md:mx-4 text-lg text-center rounded dark:text-white hover:text-black hover:md:scale-125 transition ease-in-out duration-500'
-                                                    type='button'
-                                                    onClick={increaseQty}>
-                                                    &#43;
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                : <></>
+                            product.stock &&
+                            <table className="w-full text-sm text-left text-gray-500 ">
+                                <thead className="text-xs text-gray-700 uppercase ">
+                                    <tr>
+                                        <th scope="col" className="md:py-3 px-4 text-sm">
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr className="">
+                                        <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-gray-300">
+                                            Select Quantity:
+                                        </th>
+                                        <td className="py-4 px-6">
+                                            <button
+                                                className='w-10 py-2 md:mx-4 text-lg text-center rounded dark:text-white hover:text-black hover:md:scale-125 transition ease-in-out duration-500'
+                                                type='button'
+                                                onClick={decreaseQty}>
+                                                &#8722;
+                                            </button>
+                                            <input
+                                                type="number"
+                                                value={qty}
+                                                onChange={() => { }}
+                                                disabled
+                                                className="w-16 py-2 text-base text-center border dark:bg-gray-700 dark:text-white border-gray-800 rounded [-moz-appearance:_textfield] [&::-webkit-outer-spin-button]:m-0 [&::-webkit-inner-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                            />
+                                            <button
+                                                className='w-10 py-2 md:mx-4 text-lg text-center rounded dark:text-white hover:text-black hover:md:scale-125 transition ease-in-out duration-500'
+                                                type='button'
+                                                onClick={increaseQty}>
+                                                &#43;
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         }
                     </div>
                     <div className='mx-5 md:mt-1'>

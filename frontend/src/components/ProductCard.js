@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { addToCart } from '../features/cartSlice'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { showSuccessMessage } from '../features/commonSlice'
 
 function truncate(str) {
   return str.length > 100 ? str.substring(0, 94) + "..." : str;
@@ -19,12 +20,15 @@ function ProductCard({ product }) {
   const addToCartHandler = () => {
     console.log("add to cart", product.slug);
     dispatch(addToCart(product.slug, 1));
-    navigate(`/cart/${product.slug}?qty=${1}`);
+    dispatch(showSuccessMessage("Item added to cart Successfully"))
+    setTimeout(function () {
+      navigate(`/cart/${product.slug}?qty=${1}`);
+    }, 1500);
   }
   return (
     <div className="w-96 flex justify-center items-center relative">
       <span
-        className="absolute z-10 inline-flex items-center px-3 py-1 text-xs font-semibold text-slate-600 rounded-md left-11 top-7"
+        className="absolute inline-flex items-center px-3 py-1 text-xs font-semibold text-slate-600 rounded-md left-11 top-7"
       >
         <StarRating starCount={product.avg_rating} text={`${product.avg_rating} FROM ${product.rating_count} REVIEWS`} />
       </span>
@@ -47,8 +51,9 @@ function ProductCard({ product }) {
                 $ {product.price}
               </p>
               <button
-                className="px-6 py-2 transition ease-in duration-200 uppercase rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none dark:text-white dark:border-white"
+                className={`px-6 py-2 transition ease-in duration-200 uppercase rounded-full focus:outline-none ${product.in_stock ? "hover:bg-gray-800 hover:text-white dark:text-white dark:border-white border-gray-900 border-2" : "bg-slate-400 dark:bg-slate-700 text-white"}`}
                 onClick={addToCartHandler}
+                disabled={product.in_stock ? false : true}
               >
                 Add to cart <i className="fas fa-cart-shopping"></i>
               </button>

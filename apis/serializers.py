@@ -12,11 +12,18 @@ class ProductListSerializer(serializers.Serializer):
     avg_rating = serializers.DecimalField(max_digits=2, decimal_places=1)
     slug = serializers.SlugField()
     image = serializers.SerializerMethodField()
+    in_stock = serializers.SerializerMethodField()
 
     def get_image(self, obj):
         image = ProductImage.objects.filter(id = obj.id, is_main = True)
         image = image[0]
         return (image.path.url)
+
+    def get_in_stock(self, obj):
+        if obj.stock:
+            return True
+        else:
+            return False
 
 
 class ReviewSerializer(serializers.Serializer):

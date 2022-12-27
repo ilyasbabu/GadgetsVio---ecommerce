@@ -10,7 +10,7 @@ function App() {
   return (
     <Router>
       <Header />
-      <main className='dark:bg-gray-800'>
+      <main className='dark:bg-zinc-900'>
         <Routes>
           <Route path='/' element={<HomePage />} exact />
           <Route path='/product/:slug' element={<ProductPage />} />

@@ -66,7 +66,7 @@ function CartItemCard({ item }) {
                             value={item.qty}
                             onChange={() => { }}
                             disabled
-                            className="w-16 py-2 text-base text-center border border-gray-800 rounded [-moz-appearance:_textfield] [&::-webkit-outer-spin-button]:m-0 [&::-webkit-inner-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                            className="w-16 py-2 text-base dark:bg-slate-600 text-center border border-gray-800 dark:text-white rounded [-moz-appearance:_textfield] [&::-webkit-outer-spin-button]:m-0 [&::-webkit-inner-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                         />
                         <button
                             className='w-10 py-2 md:mx-4 text-lg text-center rounded hover:text-black hover:md:scale-125 transition ease-in-out duration-500'

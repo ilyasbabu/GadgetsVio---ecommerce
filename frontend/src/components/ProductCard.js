@@ -7,11 +7,11 @@ import { useNavigate } from 'react-router-dom'
 import { showSuccessMessage } from '../features/commonSlice'
 
 function truncate(str) {
-  return str.length > 100 ? str.substring(0, 94) + "..." : str;
+  return str.length > 88 ? str.substring(0, 85) + "..." : str;
 }
 
 function truncate24(str) {
-  return str.length > 26 ? str.substring(0, 20) + ".." : str;
+  return str.length > 20 ? str.substring(0, 20) + ".." : str;
 }
 
 function ProductCard({ product }) {
@@ -33,9 +33,9 @@ function ProductCard({ product }) {
         <StarRating starCount={product.avg_rating} text={`${product.avg_rating} FROM ${product.rating_count} REVIEWS`} />
       </span>
       <div className="w-full p-4">
-        <div className="card flex flex-col justify-center p-10 bg-white dark:bg-gray-900 rounded-lg shadow-xl">
+        <div className="card flex flex-col justify-center p-10 bg-white dark:bg-black rounded-lg shadow-2xl dark:shadow-black">
           <div className="prod-title">
-            <Link to={`/product/${product.slug}`} className="text-xl uppercase text-gray-900 dark:text-white font-bold hover:underline">
+            <Link to={`/product/${product.slug}`} className="text-xl uppercase text-slate-900 dark:text-zinc-200 font-bold hover:underline">
               {truncate24(product.name)}
             </Link>
             <p className="uppercase text-sm text-gray-400">
@@ -46,12 +46,12 @@ function ProductCard({ product }) {
             <img src={product.image} alt="..." className="w-full object-cover object-center h-64 transition duration-500 hover:scale-105 sm:h-[250px]" />
           </Link>
           <div className="prod-info grid gap-5">
-            <div className="flex flex-col md:flex-row justify-between items-center text-gray-900 dark:text-white mt-4">
-              <p className="font-bold text-xl mb-2">
+            <div className="flex flex-col md:flex-row justify-between items-center text-gray-900 dark:text-zinc-200 mt-4">
+              <p className={`font-bold text-xl mb-2 ${product.in_stock ? "" : "text-slate-400 dark:text-zinc-500"}`}>
                 $ {product.price}
               </p>
               <button
-                className={`px-6 py-2 transition ease-in duration-200 uppercase rounded-full focus:outline-none ${product.in_stock ? "hover:bg-gray-800 hover:text-white dark:text-white dark:border-white border-gray-900 border-2" : "bg-slate-400 dark:bg-slate-700 text-white"}`}
+                className={`px-6 py-2 transition ease-in duration-200 uppercase rounded-full focus:outline-none ${product.in_stock ? "hover:bg-gray-800 hover:text-white dark:text-white dark:border-white border-gray-900 border-2" : "bg-slate-300 dark:bg-zinc-700 text-gray-500"}`}
                 onClick={addToCartHandler}
                 disabled={product.in_stock ? false : true}
               >

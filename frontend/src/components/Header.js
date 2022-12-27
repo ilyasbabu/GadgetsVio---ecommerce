@@ -5,12 +5,12 @@ import DarkModeToggle from './DarkModeToggle'
 function Header() {
     const [state, setState] = useState(true)
     return (
-        <header className="w-full shadow-lg bg-white dark:bg-gray-900 items-center h-16 rounded-2xl z-40 fixed">
+        <header className="w-full shadow-lg dark:shadow-md dark:shadow-black bg-white dark:bg-black items-center h-16 rounded-2xl z-40 fixed">
             <div className="relative z-20  flex-col justify-center h-full px-3 mx-auto flex-center hidden md:flex">
                 <div className="relative items-center pl-1 flex w-full lg:max-w-68 sm:pr-2 sm:ml-0">
                     <div className="container relative left-0 z-50 flex w-3/4 h-full">
                         <div className="relative p-1 flex items-center justify-start w-1/2 ml-5 mr-4 sm:mr-0 sm:right-auto">
-                            <Link to="/" className="block relative text-lg font-semibold text-slate-600 dark:text-white">
+                            <Link to="/" className="block relative text-lg font-semibold text-slate-600 dark:text-zinc-200">
                                 GadgetsVio &nbsp;&nbsp;
                             </Link>
                         </div>
@@ -25,7 +25,7 @@ function Header() {
                                 <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z">
                                 </path>
                             </svg>
-                            <input type="text" className="block w-full py-1.5 pl-10 pr-4 leading-normal rounded-2xl focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 ring-opacity-90 bg-gray-100 dark:bg-slate-800 text-gray-400 aa-input" placeholder="Search" />
+                            <input type="text" className="block w-full py-1.5 pl-10 pr-4 leading-normal rounded-2xl focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 ring-opacity-90 bg-gray-100 dark:bg-zinc-900 text-gray-400 aa-input" placeholder="Search" />
                             <div className="absolute right-0 hidden h-auto px-2 py-1 mr-2 text-xs text-gray-400 border border-gray-300 dark:border-gray-600 rounded-2xl md:block">
                                 +
                             </div>

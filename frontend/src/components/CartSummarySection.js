@@ -2,7 +2,7 @@ import React from 'react'
 
 function CartSummarySection({ total_price, total_qty, no_of_items }) {
     return (
-        <div className='lg:w-96 w-full bg-gray-100 dark:bg-gray-900 h-full right-0 lg:fixed'>
+        <div className='lg:w-96 w-full bg-gray-100 dark:bg-black h-full right-0 lg:fixed'>
             <div className="flex flex-col lg:w-96 w-full lg:h-screen h-auto lg:px-8 md:px-7 px-4 lg:py-20 md:py-10 py-6 justify-between overflow-y-auto ">
                 <div>
                     <p className="lg:text-4xl text-3xl font-black leading-9 text-gray-800 dark:text-white">Summary</p>

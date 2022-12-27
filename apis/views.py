@@ -1,6 +1,4 @@
 import time
-import sys
-import traceback
 import json
 from rest_framework.response import Response
 from rest_framework.authentication import SessionAuthentication
@@ -63,6 +61,17 @@ class ProductBasicDetailAPI(APIView):
             serializer = ProductBasicDetailSerializer(result)
             time.sleep(0.5)
             return Response(serializer.data)
+        except Exception as e:
+            result = handle_error(e)
+            return Response(json.dumps(str(result)),status=400)
+
+
+class CartPageAPI(APIView):
+    """API for cart page"""
+
+    def get(self, request):
+        try:
+            return Response("Test")
         except Exception as e:
             result = handle_error(e)
             return Response(json.dumps(str(result)),status=400)

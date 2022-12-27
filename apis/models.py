@@ -36,11 +36,17 @@ class Product(BaseModel):
         self.slug = slugify(f"{self.name}")
         return super().save(*args, **kwargs)
 
+    def __str__(self):
+        return self.name
+
 
 class ProductImage(BaseModel):
     path = models.ImageField(upload_to = 'images/product')
     is_main = models.BooleanField(default = False)
     product = models.ForeignKey(Product, on_delete = models.CASCADE, related_name= 'product_image')
+
+    def __str__(self):
+        return str(self.product.name)+" - "+str(self.is_main)
 
 
 class Review(BaseModel):
@@ -49,6 +55,9 @@ class Review(BaseModel):
     heading = models.CharField(max_length = 100, null = True, blank = True)
     description = models.TextField(null = True, blank = True)
     helpful_count = models.IntegerField(null = True, blank = True)
+
+    def __str__(self):
+        return str(self.product.name)+" - "+str(self.rating)
 
 
 class Order(BaseModel):

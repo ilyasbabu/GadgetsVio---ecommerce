@@ -22,7 +22,7 @@ function ProductCard({ product }) {
     dispatch(showSuccessMessage("Item added to cart Successfully"))
     setTimeout(function () {
       navigate(`/cart/${product.slug}?qty=${1}`);
-    }, 1500);
+    }, 2300);
   }
   return (
     <div className="w-96 flex justify-center items-center relative">

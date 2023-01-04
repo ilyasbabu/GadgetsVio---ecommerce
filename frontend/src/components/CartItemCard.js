@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux'
 
 
 function CartItemCard({ item }) {
-    console.log(item);
     const dispatch = useDispatch();
     const removeFromCartHandler = () => {
         dispatch(removeFromCart(item.slug))

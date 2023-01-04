@@ -3,6 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     message: undefined,
     type: undefined,
+    msg_list: [],
+    visible: false,
 }
 
 export const commonSlice = createSlice({
@@ -12,31 +14,30 @@ export const commonSlice = createSlice({
         show_success: (state, action) =>{
             state.message = action.payload
             state.type = "success"
+            state.visible = false
         },
         show_error: (state, action) =>{
             state.message = action.payload
             state.type = "error"
+            state.visible = false
+            state.msg_list.push({type: "error", message: action.payload})
         },
         setInitialState: (state,action) =>{
             state.message = undefined
             state.type = undefined
-        }
+            state.msg_list.pop()
+        },
     }
 })
 
 export const showSuccessMessage = (message) => async (dispatch) => {
     dispatch(show_success(message))
-    setTimeout(() => {
-        dispatch(setInitialState())
-    }, 1500)
 }
 
 export const showErrorMessage = (message) => async (dispatch) => {
+    console.log(message);
     dispatch(show_error(message))
-    setTimeout(() => {
-        // dispatch(setInitialState())
-    }, 5500)
 }
 
 export default commonSlice.reducer
-export const {show_error, show_success, setInitialState} = commonSlice.actions
+export const {show_error, show_success, setInitialState, setVisibility} = commonSlice.actions

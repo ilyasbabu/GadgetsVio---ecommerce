@@ -10,7 +10,7 @@ import CartEmpty from '../components/CartEmpty';
 
 function CartPage() {
     const { cartItems, loading } = useSelector(state => state.cart_items)
-    const { message, type } = useSelector(state => state.commons)
+    const { message, type, msg_list } = useSelector(state => state.commons)
     const dispatch = useDispatch()
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -26,7 +26,7 @@ function CartPage() {
                         <div className='pb-6 md:pb-14'>
                             <p className="lg:text-4xl text-3xl font-black leading-9 text-gray-800 dark:text-gray-50">Cart</p>
                         </div>
-                        { cartItems ?
+                        {cartItems ?
                             cartItems.map((cartItem, index) => (
                                 <CartItemCard key={index} item={cartItem} />
                             ))
@@ -41,7 +41,13 @@ function CartPage() {
                 </div>
             }
             {message && type === "success" && <SuccessCard message={message} />}
-            {message && type === "error" && <ErrorCard message={message} />}
+            <div className='flex-col-reverse fixed bottom-4 right-4 w-1/2 sm:w-1/4 '>
+                {
+                    msg_list.map(msg => (
+                        <ErrorCard message={msg.message} />
+                    ))
+                }
+            </div>
         </div>
     )
 }

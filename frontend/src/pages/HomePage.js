@@ -9,7 +9,7 @@ import { setInitialState } from '../features/commonSlice'
 
 function HomePage() {
     const { data, loading } = useSelector(state => state.products_list)
-    const { message, type } = useSelector(state => state.commons)
+    const { message, type, msg_list } = useSelector(state => state.commons)
     const products = data
     const dispatch = useDispatch()
     useEffect(() => {
@@ -19,7 +19,6 @@ function HomePage() {
             dispatch(setInitialState())
         }
     }, [dispatch])
-    console.log(products);
 
     return (
         <div className='min-h-screen'>
@@ -33,7 +32,13 @@ function HomePage() {
                 </div>
             }
             {message && type === "success" && <SuccessCard message={message} />}
-            {message && type === "error" && <ErrorCard message={message} />}
+            <div className='flex-col-reverse fixed bottom-4 right-4 w-1/2 sm:w-1/4 '>
+                {
+                    msg_list.map(msg => (
+                        <ErrorCard message={msg.message} />
+                    ))
+                }
+            </div>
         </div>
     )
 }

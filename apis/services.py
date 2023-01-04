@@ -6,6 +6,7 @@ from django.db.models import Count, F, Value
 
 
 def handle_error(e):
+    print(e)
     msg = e
     error_info = "\n".join(traceback.format_exception(*sys.exc_info()))
     if isinstance(e, ValidationError):
@@ -20,5 +21,10 @@ def get_product_list():
 
 
 def get_product_detail(slug):
-    product = Product.objects.get(slug=slug)
+    product = Product.objects.get(slug=slug, is_active=True)
     return product
+
+
+def get_stock_count(slug):
+    count = Product.objects.values_list('stock', flat=True).get(slug=slug, is_active=True)
+    return count

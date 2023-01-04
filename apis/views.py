@@ -8,7 +8,7 @@ from django.utils.translation import gettext as _
 from .models import Product
 from django.core.exceptions import ValidationError
 from .serializers import ProductListSerializer, ProductDetailSerializer, ProductBasicDetailSerializer
-from .services import get_product_detail, get_product_list, handle_error
+from .services import get_product_detail, get_product_list, handle_error, get_stock_count
 
 from django.core.exceptions import ValidationError as DjangoValidationError
 from rest_framework.exceptions import ValidationError as DRFValidationError
@@ -72,6 +72,18 @@ class CartPageAPI(APIView):
     def get(self, request):
         try:
             return Response("Test")
+        except Exception as e:
+            result = handle_error(e)
+            return Response(json.dumps(str(result)),status=400)
+
+
+class GetStockCountAPI(APIView):
+    """API for get stock count of a particular product"""
+
+    def get(self, request, slug):
+        try:
+            result = get_stock_count(slug)
+            return Response(json.dumps(result))
         except Exception as e:
             result = handle_error(e)
             return Response(json.dumps(str(result)),status=400)

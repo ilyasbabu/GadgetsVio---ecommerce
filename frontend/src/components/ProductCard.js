@@ -18,7 +18,6 @@ function ProductCard({ product }) {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const addToCartHandler = () => {
-    console.log("add to cart", product.slug);
     dispatch(addToCart(product.slug, 1));
     dispatch(showSuccessMessage("Item added to cart Successfully"))
     setTimeout(function () {

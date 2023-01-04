@@ -1,12 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from 'axios'
-import { json } from "react-router-dom";
+import { showErrorMessage, showSuccessMessage } from "./commonSlice";
+
 
 const initialState = {
     cartItems: [],
-    total_price: 0,
-    total_qty: 0,
-    loading: false,   // change
+    loading: true,   // change
     error_: 0
 }
 
@@ -29,15 +28,24 @@ export const cartItemsSlice = createSlice({
             } else {
                 state.cartItems = [...state.cartItems, item]
             }
-            state.total_qty = 0
-            state.total_price = 0
-            state.cartItems.map(x => {
-                state.total_qty += x.qty
-                state.total_price += x.price * x.qty
-                return null
-            });
             localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
             state.loading = false
+        },
+        remove_cart_item: (state, action) => {
+            console.log(action.payload);
+            state.cartItems = state.cartItems.filter(x => x.slug !== action.payload)
+            localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
+            state.loading = false
+        },
+        increase_cart_qty: (state, action) => {
+            const item = state.cartItems.find(x => x.slug === action.payload.slug)
+            item.qty = action.payload.qty + 1
+            localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
+        },
+        decrease_cart_qty: (state, action) => {
+            const item = state.cartItems.find(x => x.slug === action.payload.slug)
+            item.qty = action.payload.qty - 1
+            localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
         },
         error_throw: (state, action) => {
             state.error_ = action.payload
@@ -48,29 +56,75 @@ export const cartItemsSlice = createSlice({
 
 export const getCartItemsAsync = () => async (dispatch) => {
     try {
-        // dispatch(get_cart_items_request())
-        // const response = await axios.get(`/api/product/${slug}`);
         const items = localStorage.getItem('cartItems')
         console.log(items);
         dispatch(get_cart_items(JSON.parse(items)));
     } catch (err) {
         console.log(err);
-        dispatch(error_throw(err.response.data))
+        dispatch(showErrorMessage(JSON.parse(err.response.data)))
     }
 };
 
 export const addToCart = (slug, qty) => async (dispatch, getState) => {
     try {
-        console.log(slug, 1111, qty);
         const response = await axios.get(`/api/product/basic/${slug}`)
         var data = { ...response.data, qty }
         dispatch(add_cart_item(data))
     } catch (err) {
-        console.log(222222222222);
         console.log(err);
-        dispatch(error_throw(json.toString(err.response)))
+        dispatch(showErrorMessage(JSON.parse(err.response.data)))
+    }
+}
+
+export const removeFromCart = (slug) => async (dispatch) => {
+    try{
+        dispatch(remove_cart_item(slug))
+        dispatch(showSuccessMessage("Item removed from cart"))
+    } catch (err) {
+        console.log(err);
+        dispatch(showErrorMessage(JSON.parse(err.response.data)))
+    }
+}
+
+const getProductStockAsync = (slug) => async (dispatch) => {
+    try{
+        const response = await axios.get(`/api/product/stock/${slug}`);
+        console.log(response.data)
+        return response.data
+    } catch(err){
+        console.log(err);
+        dispatch(showErrorMessage(JSON.parse(err.response.data)))
+    }
+};
+
+export const increaseCartItem = (slug, qty) => async (dispatch) => {
+    try{
+        const stock = await dispatch(getProductStockAsync(slug))
+        console.log(stock);
+        if (qty >= stock){
+            dispatch(showErrorMessage("Stock count reached"))
+        }else{
+            dispatch(increase_cart_qty({slug, qty}))
+        }
+    }catch (err) {
+        console.log(err);
+        dispatch(showErrorMessage(JSON.parse(err.response.data)))
+    }
+}
+
+export const decreaseCartItem = (slug, qty) => async (dispatch) => {
+    try{
+        console.log(slug, qty);
+        if (qty <= 1){
+            dispatch(showErrorMessage("Cannot decrease quantity beyond 1"))
+        }else {
+            dispatch(decrease_cart_qty({slug, qty}))
+        }
+    }catch (err) {
+        console.log(err);
+        dispatch(showErrorMessage(JSON.parse(err.response.data)))
     }
 }
 
 export default cartItemsSlice.reducer
-export const { get_cart_items_request, get_cart_items, add_cart_item, error_throw } = cartItemsSlice.actions
+export const { get_cart_items_request, get_cart_items, add_cart_item, remove_cart_item, increase_cart_qty, decrease_cart_qty, error_throw } = cartItemsSlice.actions

@@ -8,13 +8,9 @@ function DarkModeToggle({ text }) {
     const toggleDarkMode = () => {
         setTheme(colorTheme);
     };
-    console.log(colorTheme,)
     return (
-        // <div className='fixed bottom-20 border-y-2 border-r-2 p-1 w-14 flex justify-end rounded-r-full dark:bg-slate-500 opacity-60'>
         <div>
-
             <button
-                // className='rounded-full p-2 border border-black shadow dark:bg-white bg-slate-800'
                 className='flex items-center'
                 onClick={toggleDarkMode}>
                 { text && <p>Change Theme &nbsp;</p> }

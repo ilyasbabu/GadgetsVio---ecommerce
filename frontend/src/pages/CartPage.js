@@ -9,7 +9,6 @@ import { getCartItemsAsync } from '../features/cartSlice';
 import CartEmpty from '../components/CartEmpty';
 
 function CartPage() {
-    console.log("asdasdsadsadsa");
     const { cartItems, loading } = useSelector(state => state.cart_items)
     const { message, type } = useSelector(state => state.commons)
     const dispatch = useDispatch()
@@ -21,7 +20,7 @@ function CartPage() {
         <div className='min-h-screen w-full'>
             {loading && <Loading />}
             {
-                type !== "error" &&
+                // type !== "error" &&
                 <div className='w-full h-full flex lg:flex-row flex-col justify-between'>
                     <div className='h-full lg:px-60 md:px-4 px-4 lg:py-20 md:py-10 py-6'>
                         <div className='pb-6 md:pb-14'>

@@ -10,7 +10,7 @@ function App() {
   return (
     <Router>
       <Header />
-      <main className='dark:bg-zinc-900'>
+      <main className='bg-gradient-to-t dark:from-black dark:via-zinc-900 dark:to-zinc-900 from-slate-100 via-white to-white'>
         <Routes>
           <Route path='/' element={<HomePage />} exact />
           <Route path='/product/:slug' element={<ProductPage />} />

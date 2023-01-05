@@ -32,7 +32,11 @@ function ProductCard({ product }) {
         <StarRating starCount={product.avg_rating} text={`${product.avg_rating} FROM ${product.rating_count} REVIEWS`} />
       </span>
       <div className="w-full p-4">
-        <div className="card flex flex-col justify-center p-10 bg-white dark:bg-black rounded-lg shadow-2xl dark:shadow-black">
+        <div className=
+          "card flex flex-col justify-center rounded-lg shadow-2xl p-10 \
+          dark:bg-gradient-to-tl dark:from-zinc-900  dark:to-black bg-gradient-to-tl from-blue-50 via-white to-white \
+          dark:shadow-black dark:hover:shadow-zinc-800 hover:shadow-zinc-500 transition ease-in-out duration-500"
+        >
           <div className="prod-title">
             <Link to={`/product/${product.slug}`} className="text-xl uppercase text-slate-900 dark:text-zinc-200 font-bold hover:underline">
               {truncate24(product.name)}
@@ -46,16 +50,18 @@ function ProductCard({ product }) {
           </Link>
           <div className="prod-info grid gap-5">
             <div className="flex flex-col md:flex-row justify-between items-center text-gray-900 dark:text-zinc-200 mt-4">
-              <p className={`font-bold text-xl mb-2 ${product.in_stock ? "" : "text-slate-400 dark:text-zinc-500"}`}>
+              <p className={`font-bold text-xl  p-1 ${product.in_stock ? "" : "text-slate-400 dark:text-zinc-500"}`}>
                 $ {product.price}
               </p>
-              <button
-                className={`px-6 py-2 transition ease-in duration-200 uppercase rounded-full focus:outline-none ${product.in_stock ? "hover:bg-gray-800 hover:text-white dark:text-white dark:border-white border-gray-900 border-2" : "bg-slate-300 dark:bg-zinc-700 text-gray-500"}`}
-                onClick={addToCartHandler}
-                disabled={product.in_stock ? false : true}
-              >
-                Add to cart <i className="fas fa-cart-shopping"></i>
-              </button>
+              <div className={`${product.in_stock ? "from-red-600 via-blue-600 to-red-600 bg-size-200 bg-pos-0 hover:bg-pos-100" : "dark:from-red-900 from-red-400 dark:to-blue-900 to-blue-400"} p-0.5 bg-gradient-to-l transition-all ease-in-out duration-500 rounded-full`}>
+                <button
+                  className={`px-6 py-2 transition ease-in duration-200 uppercase rounded-full dark:bg-black bg-white  focus:outline-none ${product.in_stock ? " dark:text-white" : "bg-slate-200 dark:bg-zinc-700 text-gray-400"}`}
+                  onClick={addToCartHandler}
+                  disabled={product.in_stock ? false : true}
+                >
+                  Add to cart <i className="fas fa-cart-shopping"></i>
+                </button>
+              </div>
             </div>
           </div>
         </div>

@@ -17,7 +17,6 @@ function ErrorCard({ message }) {
             dispatch(setInitialState())
         }, 2300)
     }, [])
-    console.log(message);
     return (
         <div className={`transition-all duration-300 ${visible ? "opacity-95" : "opacity-0"} p-2`}>
             <aside className=" z-50 flex items-center justify-center rounded-lg bg-red-500 px-5 py-3 text-white">

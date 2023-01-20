@@ -18,35 +18,35 @@ function RatingCard() {
             </div>
             <div className="flex items-center mt-4 md:mt-2">
                 <span className="text-sm font-medium text-blue-900 dark:text-blue-500">5</span>
-                <div className="mx-4 w-4/5 md:w-1/2 h-4 bg-gray-200 dark:bg-gray-500 rounded">
+                <div className="mx-4 w-4/5 md:w-1/2 h-4 bg-gray-200 dark:bg-zinc-800 rounded">
                     <div className="h-4 bg-yellow-400 rounded" style={{ width: "70%" }}></div>
                 </div>
                 <span className="text-sm font-medium text-blue-900 dark:text-blue-500">70%</span>
             </div>
             <div className="flex items-center mt-4 md:mt-2">
                 <span className="text-sm font-medium text-blue-900 dark:text-blue-500">4</span>
-                <div className="mx-4 w-4/5 md:w-1/2 h-4 bg-gray-200 dark:bg-gray-500 rounded">
+                <div className="mx-4 w-4/5 md:w-1/2 h-4 bg-gray-200 dark:bg-zinc-800 rounded">
                     <div className="h-4 bg-yellow-400 rounded" style={{ width: "17%" }}></div>
                 </div>
                 <span className="text-sm font-medium text-blue-900 dark:text-blue-500">17%</span>
             </div>
             <div className="flex items-center mt-4 md:mt-2">
                 <span className="text-sm font-medium text-blue-900 dark:text-blue-500">3</span>
-                <div className="mx-4 w-4/5 md:w-1/2 h-4 bg-gray-200 dark:bg-gray-500 rounded">
+                <div className="mx-4 w-4/5 md:w-1/2 h-4 bg-gray-200 dark:bg-zinc-800 rounded">
                     <div className="h-4 bg-yellow-400 rounded" style={{ width: "8%" }}></div>
                 </div>
                 <span className="text-sm font-medium text-blue-900 dark:text-blue-500">8%</span>
             </div>
             <div className="flex items-center mt-4 md:mt-2">
                 <span className="text-sm font-medium text-blue-900 dark:text-blue-500">2</span>
-                <div className="mx-4 w-4/5 md:w-1/2 h-4 bg-gray-200 dark:bg-gray-500 rounded">
+                <div className="mx-4 w-4/5 md:w-1/2 h-4 bg-gray-200 dark:bg-zinc-800 rounded">
                     <div className="h-4 bg-yellow-400 rounded" style={{ width: "4%" }}></div>
                 </div>
                 <span className="text-sm font-medium text-blue-900 dark:text-blue-500">4%</span>
             </div>
             <div className="flex items-center mt-4 md:mt-2">
                 <span className="text-sm font-medium text-blue-900 dark:text-blue-500">1</span>
-                <div className="mx-4 w-4/5 md:w-1/2 h-4 bg-gray-200 dark:bg-gray-500 rounded">
+                <div className="mx-4 w-4/5 md:w-1/2 h-4 bg-gray-200 dark:bg-zinc-800 rounded">
                     <div className="h-4 bg-yellow-400 rounded" style={{ width: "1%" }}></div>
                 </div>
                 <span className="text-sm font-medium text-blue-900 dark:text-blue-500">1%</span>

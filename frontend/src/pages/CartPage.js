@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
-import CartItemCard from '../components/CartItemCard';
-import CartSummarySection from '../components/CartSummarySection';
 import { useSelector, useDispatch } from 'react-redux';
 import Loading from '../components/Loading'
 import ErrorCard from '../components/ErrorCard'
 import SuccessCard from '../components/SuccessCard';
 import { getCartItemsAsync } from '../features/cartSlice';
 import CartEmpty from '../components/CartEmpty';
+import CartItemCard2 from '../components/CartItemCard';
+import CartSummary from '../components/CartSummary';
 
 function CartPage() {
     const { cartItems, loading } = useSelector(state => state.cart_items)
@@ -17,29 +17,29 @@ function CartPage() {
         dispatch(getCartItemsAsync())
     }, [dispatch])
     return (
-        <div className='min-h-screen w-full'>
+        <div className='min-h-screen bg-gray-100 dark:bg-opacity-0'>
             {loading && <Loading />}
-            {
-                // type !== "error" &&
-                <div className='w-full h-full flex lg:flex-row flex-col justify-between'>
-                    <div className='h-full lg:px-60 md:px-4 px-4 lg:py-20 md:py-10 py-6'>
-                        <div className='pb-6 md:pb-14'>
-                            <p className="lg:text-4xl text-3xl font-black leading-9 text-gray-800 dark:text-gray-50">Cart</p>
-                        </div>
-                        {cartItems ?
+            <div className="  pt-20">
+                <div className='flex px-6 lg:px-0 justify-between lg:justify-around items-center mb-10'>
+                    <h3 className=" text-2xl font-bold text-slate-800 dark:text-zinc-50 ">Cart Items</h3>
+                    <p className='text-blue-500'><span className="text-md font-medium">Continue Shopping</span><i className="fa fa-arrow-right text-sm pl-2"></i></p>
+                </div>
+                <div className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
+                    <div className="rounded-lg md:w-2/3 hello">
+                        {cartItems.length  ?
                             cartItems.map((cartItem, index) => (
-                                <CartItemCard key={index} item={cartItem} />
+                                <CartItemCard2 key={index} item={cartItem} />
                             ))
                             : <CartEmpty />
                         }
                     </div>
-                    <CartSummarySection
-                        total_price={cartItems ? cartItems.reduce((acc, item) => acc + parseFloat(item.price), 0).toFixed(2) : 0}
+                    <CartSummary
+                        total_price={cartItems ? cartItems.reduce((acc, item) => acc + parseFloat(item.price * item.qty), 0).toFixed(2) : 0}
                         total_qty={cartItems ? cartItems.reduce((acc, item) => acc + item.qty, 0) : 0}
                         no_of_items={cartItems ? cartItems.length : 0}
                     />
                 </div>
-            }
+            </div>
             {message && type === "success" && <SuccessCard message={message} />}
             <div className='flex-col-reverse fixed bottom-4 right-4 w-1/2 sm:w-1/4 '>
                 {
@@ -49,6 +49,7 @@ function CartPage() {
                 }
             </div>
         </div>
+
     )
 }
 

@@ -16,7 +16,7 @@ function SuccessCard({ message }) {
         setTimeout(() => {
             dispatch(setInitialState())
         }, 2300)
-    }, [])
+    }, [dispatch])
     return (
         <div className={`transition-all duration-300 ${visible ? "opacity-95" : "opacity-0"}`}>
             <aside className="fixed bottom-4 right-4 z-50 flex items-center justify-center rounded-lg bg-green-600 px-5 py-3 text-white">

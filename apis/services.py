@@ -23,7 +23,7 @@ def handle_error(e):
     if isinstance(e, ValidationError):
         error_info = "\n".join(e.messages)
         msg = error_info
-    return json.dumps(str(msg))
+    return {'detail':msg}
 
 
 def get_product_list():

@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { setInitialState } from '../features/commonSlice';
 
 function SuccessCard({ message }) {
-    const [visible, setVisible] = useState(true);
+    const [visible, setVisible] = useState(false);
     const dispatch = useDispatch()
     useEffect(() => {
         setTimeout(() => {

@@ -1,7 +1,23 @@
-from email.mime import image
 from rest_framework import serializers
 from .models import ProductImage, Review
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
+
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    
+    # data in access token
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+        token['user_name'] = user.username
+        return token
+
+    # data after entering username and password
+    def validate(self, attrs):
+        data = super().validate(attrs)
+        print(self)
+        data['user_name'] = self.user.username
+        return data
 
 
 class ProductListSerializer(serializers.Serializer):

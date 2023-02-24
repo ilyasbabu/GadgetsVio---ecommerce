@@ -1,34 +1,37 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
-function LoginPage() {
+function SignUpPage() {
     useEffect(() => {
         window.scrollTo(0, 0)
     },[])
-    const showPasswordClickHandle = () => {
-        setpasswordShown(!passwordShown)
-    }
-    const [passwordShown, setpasswordShown] = useState(false)
+
     return (
-        <div className='min-h-screen flex justify-center items-start pt-14 md:items-center md:pt-0'>
-            <div className="max-w-md p-12 space-y-3 rounded-xl font-mono">
-                <h1 className="text-3xl font-bold text-center dark:text-zinc-100 ">Login</h1>
+        <div className='min-h-screen flex justify-center items-start md:items-center'>
+            <div className="max-w-md pt-12 space-y-3 rounded-xl font-mono">
+                <h1 className="text-3xl font-bold text-center dark:text-zinc-100 ">Sign Up</h1>
                 <form noValidate="" action="" className="space-y-6 ">
                     <div className="space-y-1 text-base">
-                        <label htmlFor="username" className="block dark:text-gray-400">Username</label>
-                        <input type="text" name="username" id="username" placeholder="Username" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-zinc-900 dark:text-gray-100 focus:dark:border-violet-400 border border-zinc-300" />
+                        <label htmlFor="username" className="block dark:text-gray-400">Full Name</label>
+                        <input type="text" name="username" id="username" placeholder="Full Name" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-zinc-900 dark:text-gray-100 focus:dark:border-violet-400 border border-zinc-300" />
                     </div>
+                    <div className="space-y-1 text-base">
+                        <label htmlFor="username" className="block dark:text-gray-400">Email</label>
+                        <input type="text" name="username" id="username" placeholder="Email" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-zinc-900 dark:text-gray-100 focus:dark:border-violet-400 border border-zinc-300" />
+                    </div>
+
                     <div className="space-y-1 text-sm">
                         <label htmlFor="password" className="block dark:text-gray-400">Password</label>
-                        <input type={passwordShown ? "text" : "password"} name="password" id="password" placeholder="Password" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-zinc-900 dark:text-gray-100 focus:dark:border-violet-400 border border-zinc-300" />
-                        <div className="flex justify-between text-xs md:text-sm pt-2 dark:text-gray-400">
-                            <div className='flex items-center'><input type="checkbox" className='bg-slate-700' name='showPassword' onChange={showPasswordClickHandle} /><label htmlFor="showPassword" className='md:ml-2 ml-1'>Show Password</label></div>
-                            <a rel="" href="/">Forgot Password?</a>
-                        </div>
+                        <input type="password" name="password" id="password" placeholder="Password" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-zinc-900 dark:text-gray-100 focus:dark:border-violet-400 border border-zinc-300" />
+
+                    </div>
+                    <div className="space-y-1 text-sm pb-2">
+                        <label htmlFor="password" className="block dark:text-gray-400">Confirm Password</label>
+                        <input type="password" name="password" id="password" placeholder="Password" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-zinc-900 dark:text-gray-100 focus:dark:border-violet-400 border border-zinc-300" />
                     </div>
                     <div className='p-0.5 from-red-600 via-blue-600 to-red-600 bg-size-200 bg-pos-0 bg-gradient-to-tr transition ease-in-out duration-500'>
                         <button className="block w-full p-3 text-center  dark:text-gray-100 dark:bg-black hover:dark:bg-zinc-900 bg-white hover:bg-slate-100 transition ease-in-out duration-200 hover:shadow-xl">
-                            Sign in
+                            Create Account
                         </button>
                     </div>
                 </form>
@@ -55,8 +58,8 @@ function LoginPage() {
                         </svg>
                     </button>
                 </div>
-                <p className="text-xs text-center sm:px-6 dark:text-gray-400">Don't have an account?
-                    <Link to="/signup/" rel="noopener noreferrer" href="/" className="underline dark:text-gray-100">Sign up</Link>
+                <p className="text-xs text-center sm:px-6 dark:text-gray-400">Already have an account?&nbsp;
+                    <Link rel="noopener noreferrer" to="/login" className="underline dark:text-gray-100">Sign in</Link>
                 </p>
             </div>
 
@@ -64,4 +67,4 @@ function LoginPage() {
     )
 }
 
-export default LoginPage
+export default SignUpPage

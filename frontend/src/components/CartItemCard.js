@@ -14,7 +14,6 @@ function CartItemCard2({ item }) {
     const decreaseQtyHandler = () => {
         dispatch(decreaseCartItem(item.slug, item.qty))
     }
-    console.log(item);
     return (
         <div className="justify-between mb-6 rounded-lg bg-white dark:to-black   dark:from-black bg-gradient-to-tl p-6 shadow-md sm:flex sm:justify-start">
             <Link to={`/product/${item.slug}/`} className='sm:w-1/3'>

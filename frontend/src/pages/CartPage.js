@@ -34,6 +34,7 @@ function CartPage() {
                         }
                     </div>
                     <CartSummary
+                        cartItems={cartItems}
                         total_price={cartItems ? cartItems.reduce((acc, item) => acc + parseFloat(item.price * item.qty), 0).toFixed(2) : 0}
                         total_qty={cartItems ? cartItems.reduce((acc, item) => acc + item.qty, 0) : 0}
                         no_of_items={cartItems ? cartItems.length : 0}

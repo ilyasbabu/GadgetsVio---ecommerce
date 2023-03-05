@@ -26,7 +26,7 @@ function CartPage() {
                 </div>
                 <div className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
                     <div className="rounded-lg md:w-2/3 hello">
-                        {cartItems.length  ?
+                        {cartItems && cartItems.length  ?
                             cartItems.map((cartItem, index) => (
                                 <CartItemCard2 key={index} item={cartItem} />
                             ))
@@ -50,7 +50,6 @@ function CartPage() {
                 }
             </div>
         </div>
-
     )
 }
 

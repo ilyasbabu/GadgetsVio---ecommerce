@@ -8,7 +8,7 @@ function CartSummary({ cartItems, total_price, total_qty, no_of_items }) {
                 <h3 className='text-xl font-semibold dark:text-zinc-100'>Summary</h3>
             </div>
             {
-                cartItems.map((cartItem, index) => (
+                cartItems && cartItems.map((cartItem, index) => (
                     <div className="mb-2 flex justify-between" key={index}>
                         <p className="text-gray-700 dark:text-zinc-300">
                             {cartItem.name.length > 15 ? cartItem.name.substring(0, 13) + "..." : cartItem.name}
@@ -21,7 +21,7 @@ function CartSummary({ cartItems, total_price, total_qty, no_of_items }) {
                 ))
             }
             {
-                cartItems.length ?
+                cartItems && cartItems.length ?
                     <hr class="h-px my-4 bg-gray-300 border-0 dark:bg-gray-700"></hr> : <></>
             }
             {

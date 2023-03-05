@@ -22,6 +22,9 @@ export const cartItemsSlice = createSlice({
         },
         add_cart_item: (state, action) => {
             const item = action.payload
+            if (state.cartItems == null){
+                state.cartItems = []
+            }
             const itemExists = state.cartItems.find(x => x.slug === item.slug)
             if (itemExists) {
                 state.cartItems = state.cartItems.map(x => x.slug === item.slug ? item : x)

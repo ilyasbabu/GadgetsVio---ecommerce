@@ -19,7 +19,7 @@ class CustomTokenObtainPairView(TokenObtainPairView):
 class HomePageAPI(APIView):
     """API for home page"""
     authentication_classes = [SessionAuthentication]
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def get(self, request):
         print(request.user)

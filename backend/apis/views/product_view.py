@@ -3,21 +3,17 @@ from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from django.utils.translation import gettext as _
-from .services import get_product_detail, get_product_list, get_stock_count, get_product_basic_detail
-from .serializers import CustomTokenObtainPairSerializer
-from rest_framework_simplejwt.views import TokenObtainPairView
-from django.core.exceptions import ValidationError
-
-
-
-# Create your views here.
-
-class CustomTokenObtainPairView(TokenObtainPairView):
-    serializer_class = CustomTokenObtainPairSerializer
+from apis.services import (
+    get_product_detail,
+    get_product_list,
+    get_stock_count,
+    get_product_basic_detail,
+)
 
 
 class HomePageAPI(APIView):
     """API for home page"""
+
     authentication_classes = [SessionAuthentication]
     # permission_classes = [IsAuthenticated]
 
@@ -28,10 +24,11 @@ class HomePageAPI(APIView):
         return response
 
 
-
 class ProductDetailPageAPI(APIView):
     """API for product detail page"""
+
     authentication_classes = [SessionAuthentication]
+
     def get(self, request, slug):
         response = get_product_detail(slug)
         return response
@@ -39,6 +36,7 @@ class ProductDetailPageAPI(APIView):
 
 class ProductBasicDetailAPI(APIView):
     """API for product basic details"""
+
     authentication_classes = [SessionAuthentication]
 
     def get(self, request, slug):

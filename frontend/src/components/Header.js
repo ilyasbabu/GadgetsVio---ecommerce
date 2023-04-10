@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom'
 import DarkModeToggle from './DarkModeToggle'
+import { logout } from '../features/loginSlice';
+import { showSuccessMessage } from '../features/commonSlice';
 
 function Header() {
     const [width, setWidth] = useState(window.innerWidth);
@@ -28,6 +31,16 @@ function Header() {
             setFade(true)
         }, 100)
     }
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const logoutHandler = ()=>{
+        dispatch(logout());
+        dispatch(showSuccessMessage("Logged Out successfully"))
+        setTimeout(() => {
+            navigate('login')
+        }, 2300);
+    }
+    const { success } = useSelector(state => state.login)
     return (
         <header className='min-w-screen fixed w-full h-16 shadow-lg z-20 bg-white dark:bg-black dark:bg-opacity-80 bg-opacity-90'>
             <div className='flex justify-between items-center h-full px-5'>
@@ -57,12 +70,22 @@ function Header() {
                         </div>
                         <div className='p-1 hidden md:block font-mono text-zinc-600 dark:text-zinc-400'>Cart</div>
                     </Link>
-                    <Link to={'/login'} className='flex px-2 md:px-1 lg:px-3'>
-                        <div className='h-7 w-7'>
-                            <svg className='fill-current text-zinc-600 dark:text-zinc-300' viewBox="0 0 16 16"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="m 8 1 c -1.65625 0 -3 1.34375 -3 3 s 1.34375 3 3 3 s 3 -1.34375 3 -3 s -1.34375 -3 -3 -3 z m -1.5 7 c -2.492188 0 -4.5 2.007812 -4.5 4.5 v 0.5 c 0 1.109375 0.890625 2 2 2 h 8 c 1.109375 0 2 -0.890625 2 -2 v -0.5 c 0 -2.492188 -2.007812 -4.5 -4.5 -4.5 z m 0 0"></path> </g></svg>
-                        </div>
-                        <div className='p-1 hidden md:block font-mono text-zinc-600 dark:text-zinc-400'>Login</div>
-                    </Link>
+                    {
+                        !success ?
+                            <Link to={'/login'} className='flex px-2 md:px-1 lg:px-3'>
+                                <div className='h-7 w-7'>
+                                    <svg className='fill-current text-zinc-600 dark:text-zinc-300' viewBox="0 0 16 16"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="m 8 1 c -1.65625 0 -3 1.34375 -3 3 s 1.34375 3 3 3 s 3 -1.34375 3 -3 s -1.34375 -3 -3 -3 z m -1.5 7 c -2.492188 0 -4.5 2.007812 -4.5 4.5 v 0.5 c 0 1.109375 0.890625 2 2 2 h 8 c 1.109375 0 2 -0.890625 2 -2 v -0.5 c 0 -2.492188 -2.007812 -4.5 -4.5 -4.5 z m 0 0"></path> </g></svg>
+                                </div>
+                                <div className='p-1 hidden md:block font-mono text-zinc-600 dark:text-zinc-400'>Login</div>
+                            </Link>
+                            : 
+                            <button onClick={logoutHandler} className='flex px-2 md:px-1 lg:px-3'>
+                                <div className='h-7 w-7'>
+                                    <svg className='fill-current text-zinc-600 dark:text-zinc-300' viewBox="0 0 16 16"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="m 8 1 c -1.65625 0 -3 1.34375 -3 3 s 1.34375 3 3 3 s 3 -1.34375 3 -3 s -1.34375 -3 -3 -3 z m -1.5 7 c -2.492188 0 -4.5 2.007812 -4.5 4.5 v 0.5 c 0 1.109375 0.890625 2 2 2 h 8 c 1.109375 0 2 -0.890625 2 -2 v -0.5 c 0 -2.492188 -2.007812 -4.5 -4.5 -4.5 z m 0 0"></path> </g></svg>
+                                </div>
+                                <div className='p-1 hidden md:block font-mono text-zinc-600 dark:text-zinc-400'>Logout</div>
+                            </button>
+                    }
                 </div>
             </div>
             {
@@ -74,7 +97,7 @@ function Header() {
                     <div>
                         <form action="/search" className=''>
                             <input type="text" name="query" placeholder='Search' id=""
-                            className="z-30 transition-all duration-300 w-[70vw] focus:w-screen focus:outline-none text-zinc-700 dark:text-zinc-400 dark:placeholder-gray-500 border-b-2  border-gray-200 dark:border-zinc-700 dark:bg-black py-3 px-7" />
+                                className="z-30 transition-all duration-300 w-[70vw] focus:w-screen focus:outline-none text-zinc-700 dark:text-zinc-400 dark:placeholder-gray-500 border-b-2  border-gray-200 dark:border-zinc-700 dark:bg-black py-3 px-7" />
                         </form>
                     </div>
                     <div className='h-7 w-7' onClick={fadeOut}>

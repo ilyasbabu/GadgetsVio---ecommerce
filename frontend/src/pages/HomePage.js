@@ -41,8 +41,8 @@ function HomePage() {
             {message && type === "success" && <SuccessCard message={message} />}
             <div className='flex-col-reverse fixed bottom-4 right-4 w-1/2 sm:w-1/4 '>
                 {
-                    msg_list.map(msg => (
-                        <ErrorCard message={msg.message} />
+                    msg_list.map((msg, index) => (
+                        <ErrorCard key={index} message={msg.message} />
                     ))
                 }
             </div>

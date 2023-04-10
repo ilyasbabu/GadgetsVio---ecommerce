@@ -9,17 +9,16 @@ from apis.services import (
     get_stock_count,
     get_product_basic_detail,
 )
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 
 class HomePageAPI(APIView):
     """API for home page"""
 
-    authentication_classes = [SessionAuthentication]
+    authentication_classes = [JWTAuthentication]
     # permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        print(request.user)
-        # raise ValueError/
         response = get_product_list()
         return response
 
@@ -27,7 +26,7 @@ class HomePageAPI(APIView):
 class ProductDetailPageAPI(APIView):
     """API for product detail page"""
 
-    authentication_classes = [SessionAuthentication]
+    authentication_classes = [JWTAuthentication]
 
     def get(self, request, slug):
         response = get_product_detail(slug)
@@ -37,7 +36,7 @@ class ProductDetailPageAPI(APIView):
 class ProductBasicDetailAPI(APIView):
     """API for product basic details"""
 
-    authentication_classes = [SessionAuthentication]
+    authentication_classes = [JWTAuthentication]
 
     def get(self, request, slug):
         response = get_product_basic_detail(slug)

@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import HomePage from './pages/HomePage'
@@ -6,10 +7,17 @@ import ProductPage from './pages/ProductPage'
 import TestPage from './pages/TestPage'
 import LoginPage from './pages/LoginPage'
 import SignUpPage from './pages/SignUpPage'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom'
+import { getUserFromStorage } from './features/loginSlice'
+import { useDispatch, useSelector } from 'react-redux'
 
 
 function App() {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getUserFromStorage())
+  })
+  
   return (
     <Router>
       <Header />

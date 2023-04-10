@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from 'axios'
+// import axios from 'axios'
+import axiosInstance from "../utils/axiosInstance";
 import { showErrorMessage } from "./commonSlice";
 
 const initialState = {
@@ -29,7 +30,7 @@ export const productDetailSlice = createSlice({
 export const getProductDetailAsync = (slug) => async (dispatch) => {
     try{
         dispatch(get_product_detail_request())
-        const response = await axios.get(`/api/product/detail/${slug}`);
+        const response = await axiosInstance.get(`/api/product/detail/${slug}`);
         dispatch(get_product_detail(response.data));
     } catch(err){
         dispatch(showErrorMessage(JSON.parse(err.response.data)))

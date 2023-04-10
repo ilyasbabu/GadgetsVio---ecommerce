@@ -34,6 +34,11 @@ export const showSuccessMessage = (message) => async (dispatch) => {
     dispatch(show_success(message))
 }
 
+export const handleError = (error) => async (dispatch) => {
+    let message = error.response && error.response.data.detail ? error.response.data.detail : error.message
+    dispatch(showErrorMessage(message))
+}
+
 export const showErrorMessage = (message) => async (dispatch) => {
     console.log(message);
     dispatch(show_error(message))

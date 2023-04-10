@@ -4,6 +4,9 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    default_error_messages = {
+        'no_active_account': 'Invalid credentials!'
+    }
     
     # data in access token
     @classmethod
@@ -15,8 +18,7 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     # data after entering username and password
     def validate(self, attrs):
         data = super().validate(attrs)
-        print(self)
-        data['user_name'] = self.user.username
+        # data['user_name'] = self.user.username
         return data
 
 

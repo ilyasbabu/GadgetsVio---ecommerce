@@ -1,35 +1,75 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import ErrorCard from '../components/ErrorCard'
+import SuccessCard from '../components/SuccessCard'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { loginPost, logout } from '../features/loginSlice'
+import Loading from '../components/Loading'
 
 function LoginPage() {
+    const { loading, success } = useSelector(state => state.login)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    console.log(success,"sss");
     useEffect(() => {
         window.scrollTo(0, 0)
-    },[])
+        if (success) {
+            navigate('/')
+        } else {
+            dispatch(logout())
+        }
+    }, [])
     const showPasswordClickHandle = () => {
         setpasswordShown(!passwordShown)
     }
     const [passwordShown, setpasswordShown] = useState(false)
+    const { message, type, msg_list } = useSelector(state => state.commons)
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+    const handleLoginFormSubmit = (e) => {
+        e.preventDefault()
+        dispatch(
+            loginPost(username, password)
+        )
+    }
+    if (success) {
+        setTimeout(() => {
+            navigate('/')
+        }, 2300);
+    }
     return (
         <div className='min-h-screen flex justify-center items-start pt-14 md:items-center md:pt-0'>
             <div className="max-w-md p-12 space-y-3 rounded-xl font-mono">
                 <h1 className="text-3xl font-bold text-center dark:text-zinc-100 ">Login</h1>
-                <form noValidate="" action="" className="space-y-6 ">
+                <form onSubmit={handleLoginFormSubmit} className="space-y-6 ">
                     <div className="space-y-1 text-base">
                         <label htmlFor="username" className="block dark:text-gray-400">Username</label>
-                        <input type="text" name="username" id="username" placeholder="Username" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-zinc-900 dark:text-gray-100 focus:dark:border-violet-400 border border-zinc-300" />
+                        <input
+                            value={username} onChange={(e) => setUsername(e.target.value)}
+                            type="text" name="username" id="username" placeholder="Username" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-zinc-900 dark:text-gray-100 focus:dark:border-violet-400 border border-zinc-300" />
                     </div>
                     <div className="space-y-1 text-sm">
                         <label htmlFor="password" className="block dark:text-gray-400">Password</label>
-                        <input type={passwordShown ? "text" : "password"} name="password" id="password" placeholder="Password" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-zinc-900 dark:text-gray-100 focus:dark:border-violet-400 border border-zinc-300" />
+                        <input
+                            value={password} onChange={(e) => setPassword(e.target.value)}
+                            type={passwordShown ? "text" : "password"} name="password" id="password" placeholder="Password" className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-zinc-900 dark:text-gray-100 focus:dark:border-violet-400 border border-zinc-300" />
                         <div className="flex justify-between text-xs md:text-sm pt-2 dark:text-gray-400">
                             <div className='flex items-center'><input type="checkbox" className='bg-slate-700' name='showPassword' onChange={showPasswordClickHandle} /><label htmlFor="showPassword" className='md:ml-2 ml-1'>Show Password</label></div>
                             <a rel="" href="/">Forgot Password?</a>
                         </div>
                     </div>
                     <div className='p-0.5 from-red-600 via-blue-600 to-red-600 bg-size-200 bg-pos-0 bg-gradient-to-tr transition ease-in-out duration-500'>
-                        <button className="block w-full p-3 text-center  dark:text-gray-100 dark:bg-black hover:dark:bg-zinc-900 bg-white hover:bg-slate-100 transition ease-in-out duration-200 hover:shadow-xl">
-                            Sign in
-                        </button>
+                        {
+                            !loading ?
+                                <button className="block w-full p-3 text-center  dark:text-gray-100 dark:bg-black hover:dark:bg-zinc-900 bg-white hover:bg-slate-100 transition ease-in-out duration-200 hover:shadow-xl">
+                                    Sign in
+                                </button>
+                                :
+                                <div className=" flex justify-center items-center bg-white dark:bg-black p-1">
+                                    <div className="animate-spin rounded-full h-4 w-4 border-b-4 border-r-2  m-3 border-blue-700"></div>
+                                </div>
+                        }
                     </div>
                 </form>
 
@@ -59,7 +99,14 @@ function LoginPage() {
                     <Link to="/signup/" rel="noopener noreferrer" href="/" className="underline dark:text-gray-100">Sign up</Link>
                 </p>
             </div>
-
+            {message && type === "success" && <SuccessCard message={message} />}
+            <div className='flex-col-reverse fixed bottom-4 right-4 w-1/2 sm:w-1/4 '>
+                {
+                    msg_list.map(msg => (
+                        <ErrorCard message={msg.message} />
+                    ))
+                }
+            </div>
         </div>
     )
 }

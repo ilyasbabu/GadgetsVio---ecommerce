@@ -42,7 +42,7 @@ function Header() {
     }
     const { success } = useSelector(state => state.login)
     return (
-        <header className='min-w-screen fixed w-full h-16 shadow-lg z-20 bg-white dark:bg-black dark:bg-opacity-80 bg-opacity-90'>
+        <header className='min-w-screen fixed w-full h-16 shadow-lg z-20 bg-white dark:bg-black dark:bg-opacity-80 bg-opacity-90 md:px-16'>
             <div className='flex justify-between items-center h-full px-5'>
                 <Link to="/">
                     <h1 className='text-lg font-mono font-semibold text-zinc-600 dark:text-zinc-200'>Gadgetsvio</h1>

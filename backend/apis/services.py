@@ -39,7 +39,9 @@ def get_product_list():
             .order_by("?")
         )
         serialized_products = ProductListSerializer(products, many=True)
-        return Response(serialized_products.data)
+        brands = Brand.objects.filter(is_active=True).values("slug", "image")
+        data = {"products": serialized_products.data, "brands": brands}
+        return Response(data=data)
     except Exception as e:
         return Response(handle_error(e), status=406)
 

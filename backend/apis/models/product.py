@@ -14,6 +14,27 @@ class BaseModel(models.Model):
         abstract = True
 
 
+class Brand(BaseModel):
+    error_messages = {"slug": {"unique": "Brand with exact name Already Exists"}}
+    name = models.CharField(max_length=50)
+    slug = models.SlugField(
+        null=True,
+        blank=True,
+        unique=True,
+        max_length=200,
+        error_messages=error_messages["slug"],
+    )
+    description = models.TextField(null=True, blank=True)
+    image = models.ImageField(upload_to="images/brand", null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(f"{self.name}")
+        return super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.name
+
+
 class Product(BaseModel):
     error_messages = {"slug": {"unique": "Product with exact name Already Exists"}}
     CATEGORY_CHOICES = (
@@ -25,7 +46,7 @@ class Product(BaseModel):
     )
     name = models.CharField(max_length=100)
     description = models.TextField()
-    brand = models.CharField(max_length=50)
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE, null=True, blank=True)
     category = models.CharField(max_length=15, choices=CATEGORY_CHOICES)
     price = models.DecimalField(max_digits=7, decimal_places=2)
     stock = models.IntegerField(default=0)

@@ -7,11 +7,11 @@ import { useNavigate } from 'react-router-dom'
 import { showSuccessMessage } from '../features/commonSlice'
 
 function truncate(str) {
-  return str.length > 88 ? str.substring(0, 85) + "..." : str;
+  return str.length > 56 ? str.substring(0, 52) + "..." : str;
 }
 
 function truncate24(str) {
-  return str.length > 20 ? str.substring(0, 20) + ".." : str;
+  return str.length > 19 ? str.substring(0, 19) + ".." : str;
 }
 
 function ProductCard({ product }) {
@@ -25,7 +25,7 @@ function ProductCard({ product }) {
     }, 2300);
   }
   return (
-    <div className="w-96 flex justify-center items-center relative">
+    <div className="w-[22rem] flex justify-center items-center relative">
       <span
         className="absolute inline-flex items-center px-3 py-1 text-xs font-semibold text-slate-600 rounded-md left-11 top-7"
       >
@@ -38,10 +38,10 @@ function ProductCard({ product }) {
           dark:shadow-black dark:hover:shadow-zinc-800 hover:shadow-zinc-500 transition ease-in-out duration-500"
         >
           <div className="prod-title">
-            <Link to={`/product/${product.slug}`} className="text-xl uppercase text-slate-900 dark:text-zinc-200 font-bold hover:underline">
+            <Link to={`/product/${product.slug}`} className="text-lg uppercase text-slate-900 dark:text-zinc-200 font-bold hover:underline">
               {truncate24(product.name)}
             </Link>
-            <p className="uppercase text-sm text-gray-400">
+            <p className="uppercase text-xs text-gray-400">
               {truncate(product.description)}
             </p>
           </div>
@@ -50,12 +50,12 @@ function ProductCard({ product }) {
           </Link>
           <div className="prod-info grid gap-5">
             <div className="flex flex-col md:flex-row justify-between items-center text-gray-900 dark:text-zinc-200 mt-4">
-              <p className={`font-bold text-xl  p-1 ${product.in_stock ? "" : "text-slate-400 dark:text-zinc-500"}`}>
+              <p className={`font-bold text-lg p-1 ${product.in_stock ? "" : "text-slate-400 dark:text-zinc-500"}`}>
                 $ {product.price}
               </p>
               <div className={`${product.in_stock ? "from-red-600 via-blue-600 to-red-600 bg-size-200 bg-pos-0 hover:bg-pos-100" : "dark:from-red-900 from-red-400 dark:to-blue-900 to-blue-400"} p-0.5 bg-gradient-to-l transition-all ease-in-out duration-500 rounded-full`}>
                 <button
-                  className={`px-6 py-2 transition ease-in duration-200 uppercase rounded-full dark:bg-black bg-white  focus:outline-none ${product.in_stock ? " dark:text-white" : "bg-slate-200 dark:bg-zinc-700 text-gray-400"}`}
+                  className={`px-6 py-2 text-sm transition ease-in duration-200 uppercase rounded-full dark:bg-black bg-white  focus:outline-none ${product.in_stock ? " dark:text-white" : "bg-slate-200 dark:bg-zinc-700 text-gray-400"}`}
                   onClick={addToCartHandler}
                   disabled={product.in_stock ? false : true}
                 >

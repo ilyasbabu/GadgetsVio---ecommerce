@@ -9,7 +9,11 @@ import { setInitialState } from '../features/commonSlice'
 import PromoBanner1 from '../components/PromoBanner1'
 import FaqCard from '../components/FaqCard'
 import PromoBanner2 from '../components/PromoBanner2'
-import Carousel1 from '../components/Carousel1'
+import CarouselComponent from '../components/CarouselComponent'
+import banner1 from "../images/banner/18494353_6003842.jpg"
+import banner2 from "../images/banner/33139536_7995902.jpg"
+import banner3 from "../images/banner/33139539_7995937.jpg"
+import ProductsSlider from '../components/ProductsSlider'
 
 function HomePage() {
     const { data, loading } = useSelector(state => state.products_list)
@@ -19,25 +23,23 @@ function HomePage() {
     useEffect(() => {
         window.scrollTo(0, 0)
         dispatch(getProductListAsync())
+        console.log(banner1);
         return () => {
             dispatch(setInitialState())
         }
     }, [dispatch])
+    const bannerArr = [
+        banner1, banner2, banner3
+    ]
 
     return (
         <div className='min-h-screen'>
+            
             {loading && <Loading />}
-            <div>
+            <div className='px-0 sm:px-3 md:px-10 lg:px-28 xl:px-44 pt-9'>
+                <CarouselComponent carouselItems={bannerArr} />
                 <PromoBanner1 />
-                <Carousel1/>
-                {
-                    type !== "error" &&
-                    <div className="px-28 grid justify-center items-center grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-x-4 gap-y-8 place-items-center">
-                        {products.map(product => (
-                            <ProductCard key={product.slug} product={product} />
-                        ))}
-                    </div>
-                }
+                <ProductsSlider products={products} header={"Featured Products"}/>
                 <PromoBanner2 />
                 <FaqCard />
             </div>

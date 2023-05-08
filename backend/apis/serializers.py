@@ -53,6 +53,14 @@ class BrandListSerializer(serializers.Serializer):
         return ""
 
 
+class BannerListSerializer(serializers.Serializer):
+    redirect_url = serializers.CharField()
+    image = serializers.SerializerMethodField()
+
+    def get_image(self, obj):
+        return obj.image.url
+
+
 class ReviewSerializer(serializers.Serializer):
     id = serializers.IntegerField()
     rating = serializers.IntegerField()

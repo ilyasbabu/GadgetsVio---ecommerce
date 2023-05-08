@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from django.utils.translation import gettext as _
 from apis.services import (
     get_product_detail,
-    get_product_list,
+    get_homepage_data,
     get_stock_count,
     get_product_basic_detail,
 )
@@ -19,7 +19,7 @@ class HomePageAPI(APIView):
     # permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        response = get_product_list()
+        response = get_homepage_data()
         return response
 
 

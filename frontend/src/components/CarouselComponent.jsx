@@ -1,15 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
+import { useNavigate } from 'react-router-dom';
 
 function CarouselComponent({ carouselItems }) {
-    const testo = (d, e) => {
+    const navigate = useNavigate()
+    const handleClick = (d, e) => {
+        let item = carouselItems[d]
+        if (item.redirect_url) {
+            navigate(item.redirect_url)
+        }
     }
     return (
         <div className='px-0  '>
             <Carousel
                 autoPlay emulateTouch infiniteLoop
-                onClickItem={testo}
+                onClickItem={handleClick}
                 showArrows={false}
                 showStatus={false}
                 showIndicators={false}
@@ -17,9 +23,9 @@ function CarouselComponent({ carouselItems }) {
                 stopOnHover={false}
                 interval={2500}
             >
-                {carouselItems.map(item => (
-                    <div>
-                        <img src={item} alt="" />
+                {carouselItems.map((item, index) => (
+                    <div key={index}>
+                        <img src={item.image} alt={item.image} />
                     </div>
                 ))}
             </Carousel>

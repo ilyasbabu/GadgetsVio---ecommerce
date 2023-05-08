@@ -11,6 +11,7 @@ from .serializers import (
     ProductDetailSerializer,
     ProductBasicDetailSerializer,
     BrandListSerializer,
+    BannerListSerializer,
 )
 from django.db.models import Count, F, Value
 from django.conf import settings
@@ -31,7 +32,7 @@ def handle_error(e):
     return {"detail": msg}
 
 
-def get_product_list():
+def get_homepage_data():
     try:
         wait()
         products = (
@@ -42,7 +43,13 @@ def get_product_list():
         serialized_products = ProductListSerializer(products, many=True)
         brands = Brand.objects.filter(is_active=True).order_by("?")
         serialized_brands = BrandListSerializer(brands, many=True)
-        data = {"products": serialized_products.data, "brands": serialized_brands.data}
+        banners = Banner.objects.filter(is_active=True).order_by("?")
+        serialized_banners = BannerListSerializer(banners, many=True)
+        data = {
+            "products": serialized_products.data,
+            "brands": serialized_brands.data,
+            "banners": serialized_banners.data,
+        }
         return Response(data=data)
     except Exception as e:
         return Response(handle_error(e), status=406)

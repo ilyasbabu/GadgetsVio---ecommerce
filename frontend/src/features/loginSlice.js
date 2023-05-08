@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { showErrorMessage, showSuccessMessage } from "./commonSlice";
+import { showSuccessMessage } from "./commonSlice";
 import { handleError } from "./commonSlice";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
@@ -69,7 +69,7 @@ export const getUserFromStorage = () => async (dispatch) => {
     try{
         const data = localStorage.getItem('userData');
         const tokens = localStorage.getItem('authTokens');
-        console.log(tokens);
+        // console.log(tokens);
         if (tokens === null || tokens === "{}" || tokens === undefined){
             dispatch(logout())
         }else{

@@ -1,15 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 // import axios from 'axios'
 import axiosInstance from "../utils/axiosInstance";
-import { showErrorMessage,handleError } from "./commonSlice";
+import { handleError } from "./commonSlice";
 
 const initialState = {
     data: [],
     brands: [],
+    banners: [],
     loading: true,
 }
 
-export const productListSlice = createSlice({
+export const homePageSlice = createSlice({
     name: "products_list",
     initialState,
     reducers: {
@@ -19,6 +20,7 @@ export const productListSlice = createSlice({
         get_products_list: (state, action) => {
             state.data = action.payload.products
             state.brands = action.payload.brands
+            state.banners = action.payload.banners
             state.loading = false
         },
         reset: (state) => {
@@ -40,8 +42,8 @@ export const getProductListAsync = () => async (dispatch) => {
     }
 };
 
-export default productListSlice.reducer
+export default homePageSlice.reducer
 // export const showProducts = (state) => state.products_list.data;
 // export const loading = (state) => state.products_list.loading;
 // export const error_ = (state) => state.products_list.error_;
-export const { get_products_list_request, get_products_list, reset } = productListSlice.actions
+export const { get_products_list_request, get_products_list, reset } = homePageSlice.actions

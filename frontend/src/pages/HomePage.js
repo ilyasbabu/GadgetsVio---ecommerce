@@ -1,43 +1,35 @@
 import React, { useEffect } from 'react'
-import ProductCard from '../components/ProductCard'
 import ErrorCard from '../components/ErrorCard'
 import SuccessCard from '../components/SuccessCard'
 import Loading from '../components/Loading'
 import { useDispatch, useSelector } from 'react-redux'
-import { getProductListAsync } from '../features/productListSlice'
+import { getProductListAsync } from '../features/homePageSlice'
 import { setInitialState } from '../features/commonSlice'
 import PromoBanner1 from '../components/PromoBanner1'
 import FaqCard from '../components/FaqCard'
 import PromoBanner2 from '../components/PromoBanner2'
 import CarouselComponent from '../components/CarouselComponent'
-import banner1 from "../images/banner/18494353_6003842.jpg"
-import banner2 from "../images/banner/33139536_7995902.jpg"
-import banner3 from "../images/banner/33139539_7995937.jpg"
 import ProductsSlider from '../components/ProductsSlider'
 import BrandsCard from '../components/BrandsCard'
 
 function HomePage() {
-    const { data, brands, loading } = useSelector(state => state.products_list)
+    const { data, brands, banners, loading } = useSelector(state => state.products_list)
     const { message, type, msg_list } = useSelector(state => state.commons)
     const products = data
     const dispatch = useDispatch()
     useEffect(() => {
         window.scrollTo(0, 0)
         dispatch(getProductListAsync())
-        console.log(banner1);
         return () => {
             dispatch(setInitialState())
         }
     }, [dispatch])
-    const bannerArr = [
-        banner1, banner2, banner3
-    ]
 
     return (
         <div className='min-h-screen'>
             {loading && <Loading />}
-            <div className='px-0 sm:px-3 md:px-10 lg:px-28 xl:px-44 pt-9'>
-                <CarouselComponent carouselItems={bannerArr} />
+            <div className='px-0 sm:px-3 md:px-10 lg:px-28 xl:px-44'>
+                <CarouselComponent carouselItems={banners} />
                 <PromoBanner1 />
                 <ProductsSlider products={products} header={"Featured Products"}/>
                 <BrandsCard brands={brands}/>

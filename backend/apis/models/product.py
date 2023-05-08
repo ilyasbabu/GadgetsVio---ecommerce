@@ -3,7 +3,6 @@ from django.utils.text import slugify
 from django.conf import settings
 
 
-
 class BaseModel(models.Model):
     is_active = models.BooleanField(default=True)
     created_time = models.DateTimeField(auto_now_add=True)
@@ -118,3 +117,12 @@ class ShippingAddress(BaseModel):
     city = models.CharField(max_length=100)
     postal_code = models.CharField(max_length=50)
     shipping_price = models.DecimalField(max_digits=7, decimal_places=2)
+
+
+class Banner(BaseModel):
+    name = models.CharField(max_length=100)
+    image = models.ImageField(upload_to="images/banner")
+    redirect_url = models.CharField(max_length=200, null=True, blank=True)
+
+    def __str__(self):
+        return self.name

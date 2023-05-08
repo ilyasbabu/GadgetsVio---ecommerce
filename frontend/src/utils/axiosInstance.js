@@ -1,9 +1,9 @@
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 
-const baseURL = "http://0.0.0.0:8080";
+// const baseURL = "http://0.0.0.0:8080";
 let authTokens = localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null
-console.log(authTokens?.access);
+// console.log(authTokens?.access);
 const headers = {
     Authorization: `Bearer ${authTokens?.access}`,
     'X-Example-Header': "example",

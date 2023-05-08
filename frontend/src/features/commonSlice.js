@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { logout } from "./loginSlice";
 
 const initialState = {
     message: undefined,
@@ -36,7 +37,11 @@ export const showSuccessMessage = (message) => async (dispatch) => {
 
 export const handleError = (error) => async (dispatch) => {
     let message = error.response && error.response.data.detail ? error.response.data.detail : error.message
-    dispatch(showErrorMessage(message))
+    if (message === "Token is invalid or expired"){
+        dispatch(logout());
+    }else{
+        dispatch(showErrorMessage(message))
+    }
 }
 
 export const showErrorMessage = (message) => async (dispatch) => {

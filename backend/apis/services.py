@@ -10,6 +10,7 @@ from .serializers import (
     ProductListSerializer,
     ProductDetailSerializer,
     ProductBasicDetailSerializer,
+    BrandListSerializer,
 )
 from django.db.models import Count, F, Value
 from django.conf import settings
@@ -39,8 +40,9 @@ def get_product_list():
             .order_by("?")
         )
         serialized_products = ProductListSerializer(products, many=True)
-        brands = Brand.objects.filter(is_active=True).values("slug", "image")
-        data = {"products": serialized_products.data, "brands": brands}
+        brands = Brand.objects.filter(is_active=True).order_by("?")
+        serialized_brands = BrandListSerializer(brands, many=True)
+        data = {"products": serialized_products.data, "brands": serialized_brands.data}
         return Response(data=data)
     except Exception as e:
         return Response(handle_error(e), status=406)

@@ -5,6 +5,7 @@ import { showErrorMessage,handleError } from "./commonSlice";
 
 const initialState = {
     data: [],
+    brands: [],
     loading: true,
 }
 
@@ -16,7 +17,8 @@ export const productListSlice = createSlice({
             state.loading = true
         },
         get_products_list: (state, action) => {
-            state.data = action.payload
+            state.data = action.payload.products
+            state.brands = action.payload.brands
             state.loading = false
         },
         reset: (state) => {

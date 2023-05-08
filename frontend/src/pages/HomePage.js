@@ -14,9 +14,10 @@ import banner1 from "../images/banner/18494353_6003842.jpg"
 import banner2 from "../images/banner/33139536_7995902.jpg"
 import banner3 from "../images/banner/33139539_7995937.jpg"
 import ProductsSlider from '../components/ProductsSlider'
+import BrandsCard from '../components/BrandsCard'
 
 function HomePage() {
-    const { data, loading } = useSelector(state => state.products_list)
+    const { data, brands, loading } = useSelector(state => state.products_list)
     const { message, type, msg_list } = useSelector(state => state.commons)
     const products = data
     const dispatch = useDispatch()
@@ -34,12 +35,12 @@ function HomePage() {
 
     return (
         <div className='min-h-screen'>
-            
             {loading && <Loading />}
             <div className='px-0 sm:px-3 md:px-10 lg:px-28 xl:px-44 pt-9'>
                 <CarouselComponent carouselItems={bannerArr} />
                 <PromoBanner1 />
                 <ProductsSlider products={products} header={"Featured Products"}/>
+                <BrandsCard brands={brands}/>
                 <PromoBanner2 />
                 <FaqCard />
             </div>

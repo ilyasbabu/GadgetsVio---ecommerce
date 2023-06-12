@@ -10,6 +10,7 @@ import SignUpPage from './pages/SignUpPage'
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom'
 import { getUserFromStorage } from './features/loginSlice'
 import { useDispatch, useSelector } from 'react-redux'
+import BrandPage from './pages/BrandPage'
 
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
   useEffect(() => {
     dispatch(getUserFromStorage())
   })
-  
+
   return (
     <Router>
       <Header />
@@ -30,6 +31,7 @@ function App() {
           <Route path='/test/' element={<TestPage />} />
           <Route path='/login/' element={<LoginPage />} />
           <Route path='/signup/' element={<SignUpPage />} />
+          <Route path='/brand/:slug' element={<BrandPage />} />
         </Routes>
       </main>
       <Footer />

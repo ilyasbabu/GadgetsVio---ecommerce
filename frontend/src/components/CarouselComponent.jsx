@@ -23,7 +23,7 @@ function CarouselComponent({ carouselItems }) {
                 stopOnHover={false}
                 interval={2500}
             >
-                {carouselItems.map((item, index) => (
+                {carouselItems && carouselItems.map((item, index) => (
                     <div key={index}>
                         <img src={item.image} alt={item.image} />
                     </div>

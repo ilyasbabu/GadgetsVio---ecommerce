@@ -14,7 +14,7 @@ function ProductsSlider({ products, header }) {
                 <h3 className='dark:text-white text-xl font-semibold ml-4 mt-6'>{header}</h3>
             </div>
             <div className='flex overflow-x-scroll scrollbar scroll-smooth' id='container' >
-                {products.map(product => (
+                {products && products.map(product => (
                     <ProductCard2 key={product.slug} product={product} />
                 ))}
             </div>
